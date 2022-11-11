@@ -1,0 +1,1 @@
+<?phprequire __DIR__ . "/config.php";(new \Nemundo\App\ModelDesigner\ModelDesignerConfig())->addProject(new \Nemundo\Webcam\WebcamProject());\Nemundo\App\ClassDesigner\ClassDesignerConfig::$classBuilderFormList[] = new \Nemundo\Content\ClassDesigner\ContentTypeClassBuilderForm();

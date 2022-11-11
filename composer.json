@@ -1,0 +1,20 @@
+{
+    "name": "nemundo/webcam",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Nemundo\\Webcam\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Urs Lang",
+            "email": "urs.lang@nemundo.ch"
+        }
+    ],
+    "require": {
+        "nemundo/framework": "*",
+        "nemundo/content": "*",
+        "nemundo/kml": "*"
+    }
+}

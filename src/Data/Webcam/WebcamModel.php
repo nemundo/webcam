@@ -1,0 +1,123 @@
+<?php
+namespace Nemundo\Webcam\Data\Webcam;
+class WebcamModel extends \Nemundo\Model\Definition\Model\AbstractModel {
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $id;
+
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $webcam;
+
+/**
+* @var \Nemundo\Model\Type\Text\LargeTextType
+*/
+public $description;
+
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $direction;
+
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $imageUrl;
+
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $sourceId;
+
+/**
+* @var \Nemundo\Webcam\Data\Source\SourceExternalType
+*/
+public $source;
+
+/**
+* @var \Nemundo\Model\Type\Geo\GeoCoordinateType
+*/
+public $geoCoordinate;
+
+protected function loadModel() {
+$this->tableName = "webcam_webcam";
+$this->aliasTableName = "webcam_webcam";
+$this->label = "Webcam";
+
+$this->primaryIndex = new \Nemundo\Db\Index\AutoIncrementIdPrimaryIndex();
+
+$this->id = new \Nemundo\Model\Type\Id\IdType($this);
+$this->id->tableName = "webcam_webcam";
+$this->id->externalTableName = "webcam_webcam";
+$this->id->fieldName = "id";
+$this->id->aliasFieldName = "webcam_webcam_id";
+$this->id->label = "Id";
+$this->id->allowNullValue = false;
+
+$this->webcam = new \Nemundo\Model\Type\Text\TextType($this);
+$this->webcam->tableName = "webcam_webcam";
+$this->webcam->externalTableName = "webcam_webcam";
+$this->webcam->fieldName = "webcam";
+$this->webcam->aliasFieldName = "webcam_webcam_webcam";
+$this->webcam->label = "Webcam";
+$this->webcam->allowNullValue = false;
+$this->webcam->length = 255;
+
+$this->description = new \Nemundo\Model\Type\Text\LargeTextType($this);
+$this->description->tableName = "webcam_webcam";
+$this->description->externalTableName = "webcam_webcam";
+$this->description->fieldName = "description";
+$this->description->aliasFieldName = "webcam_webcam_description";
+$this->description->label = "Description";
+$this->description->allowNullValue = false;
+
+$this->direction = new \Nemundo\Model\Type\Number\NumberType($this);
+$this->direction->tableName = "webcam_webcam";
+$this->direction->externalTableName = "webcam_webcam";
+$this->direction->fieldName = "direction";
+$this->direction->aliasFieldName = "webcam_webcam_direction";
+$this->direction->label = "Direction";
+$this->direction->allowNullValue = false;
+
+$this->imageUrl = new \Nemundo\Model\Type\Text\TextType($this);
+$this->imageUrl->tableName = "webcam_webcam";
+$this->imageUrl->externalTableName = "webcam_webcam";
+$this->imageUrl->fieldName = "image_url";
+$this->imageUrl->aliasFieldName = "webcam_webcam_image_url";
+$this->imageUrl->label = "Image Url";
+$this->imageUrl->allowNullValue = false;
+$this->imageUrl->length = 255;
+
+$this->sourceId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->sourceId->tableName = "webcam_webcam";
+$this->sourceId->fieldName = "source";
+$this->sourceId->aliasFieldName = "webcam_webcam_source";
+$this->sourceId->label = "Source";
+$this->sourceId->allowNullValue = false;
+
+$this->geoCoordinate = new \Nemundo\Model\Type\Geo\GeoCoordinateType($this);
+$this->geoCoordinate->tableName = "webcam_webcam";
+$this->geoCoordinate->externalTableName = "webcam_webcam";
+$this->geoCoordinate->fieldName = "geo_coordinate";
+$this->geoCoordinate->aliasFieldName = "webcam_webcam_geo_coordinate";
+$this->geoCoordinate->label = "Geo Coordinate";
+$this->geoCoordinate->allowNullValue = false;
+
+$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
+$index->indexName = "image_url";
+$index->addType($this->imageUrl);
+
+}
+public function loadSource() {
+if ($this->source == null) {
+$this->source = new \Nemundo\Webcam\Data\Source\SourceExternalType($this, "webcam_webcam_source");
+$this->source->tableName = "webcam_webcam";
+$this->source->fieldName = "source";
+$this->source->aliasFieldName = "webcam_webcam_source";
+$this->source->label = "Source";
+}
+return $this;
+}
+}

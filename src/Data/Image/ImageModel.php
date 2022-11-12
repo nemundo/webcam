@@ -36,6 +36,16 @@ public $imageAutoSize500;
 */
 public $hash;
 
+/**
+* @var \Nemundo\Model\Type\File\ImageType
+*/
+public $squareImage;
+
+/**
+* @var \Nemundo\Model\Type\ImageFormat\AutoSizeModelImageFormat
+*/
+public $squareImageAutoSize500;
+
 protected function loadModel() {
 $this->tableName = "webcam_image";
 $this->aliasTableName = "webcam_image";
@@ -84,6 +94,16 @@ $this->hash->aliasFieldName = "webcam_image_hash";
 $this->hash->label = "Hash";
 $this->hash->allowNullValue = false;
 $this->hash->length = 255;
+
+$this->squareImage = new \Nemundo\Model\Type\File\ImageType($this);
+$this->squareImage->tableName = "webcam_image";
+$this->squareImage->externalTableName = "webcam_image";
+$this->squareImage->fieldName = "square_image";
+$this->squareImage->aliasFieldName = "webcam_image_square_image";
+$this->squareImage->label = "Square Image";
+$this->squareImage->allowNullValue = false;
+$this->squareImageAutoSize500 = new \Nemundo\Model\Type\ImageFormat\AutoSizeModelImageFormat($this->squareImage);
+$this->squareImageAutoSize500->size = 500;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "webcam_hash";

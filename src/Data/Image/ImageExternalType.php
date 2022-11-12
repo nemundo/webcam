@@ -31,6 +31,11 @@ public $image;
 */
 public $hash;
 
+/**
+* @var \Nemundo\Model\Type\File\ImageType
+*/
+public $squareImage;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = ImageModel::class;
@@ -74,6 +79,14 @@ $this->hash->externalTableName = $this->externalTableName;
 $this->hash->aliasFieldName = $this->hash->tableName . "_" . $this->hash->fieldName;
 $this->hash->label = "Hash";
 $this->addType($this->hash);
+
+$this->squareImage = new \Nemundo\Model\Type\File\ImageType();
+$this->squareImage->fieldName = "square_image";
+$this->squareImage->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->squareImage->externalTableName = $this->externalTableName;
+$this->squareImage->aliasFieldName = $this->squareImage->tableName . "_" . $this->squareImage->fieldName;
+$this->squareImage->label = "Square Image";
+$this->addType($this->squareImage);
 
 }
 public function loadWebcam() {

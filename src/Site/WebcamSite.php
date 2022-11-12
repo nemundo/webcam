@@ -18,10 +18,13 @@ class WebcamSite extends AbstractSite
 
     protected function loadSite()
     {
+
         $this->title = 'Webcam';
         $this->url = 'webcam';
 
         new WebcamNewSite($this);
+        new WebcamEditSite($this);
+        new WebcamDeleteSite($this);
         new WebcamItemSite($this);
 
         new WebcamCsvSite($this);

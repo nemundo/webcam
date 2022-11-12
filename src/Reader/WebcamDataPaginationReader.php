@@ -2,10 +2,11 @@
 
 namespace Nemundo\Webcam\Reader;
 
+use Nemundo\Webcam\Data\Webcam\WebcamPaginationReader;
 use Nemundo\Webcam\Data\Webcam\WebcamReader;
 use Nemundo\Webcam\Reader\Filter\WebcamFilter;
 
-class WebcamDataReader extends WebcamReader
+class WebcamDataPaginationReader extends WebcamPaginationReader
 {
 
     use WebcamFilter;

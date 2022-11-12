@@ -41,6 +41,11 @@ public $image;
 */
 public $hash;
 
+/**
+* @var \Nemundo\Model\Reader\Property\File\ImageReaderProperty
+*/
+public $squareImage;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -52,6 +57,7 @@ $this->loadNemundoWebcamDataWebcamWebcamwebcamRow($model->webcam);
 $this->dateTime = new \Nemundo\Core\Type\DateTime\DateTime($this->getModelValue($model->dateTime));
 $this->image = new \Nemundo\Model\Reader\Property\File\ImageReaderProperty($row, $model->image);
 $this->hash = $this->getModelValue($model->hash);
+$this->squareImage = new \Nemundo\Model\Reader\Property\File\ImageReaderProperty($row, $model->squareImage);
 }
 private function loadNemundoWebcamDataWebcamWebcamwebcamRow($model) {
 $this->webcam = new \Nemundo\Webcam\Data\Webcam\WebcamRow($this->row, $model);

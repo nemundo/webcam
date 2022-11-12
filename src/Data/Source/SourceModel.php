@@ -16,6 +16,11 @@ public $source;
 */
 public $url;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $hasUrl;
+
 protected function loadModel() {
 $this->tableName = "webcam_source";
 $this->aliasTableName = "webcam_source";
@@ -48,6 +53,14 @@ $this->url->aliasFieldName = "webcam_source_url";
 $this->url->label = "Url";
 $this->url->allowNullValue = false;
 $this->url->length = 255;
+
+$this->hasUrl = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->hasUrl->tableName = "webcam_source";
+$this->hasUrl->externalTableName = "webcam_source";
+$this->hasUrl->fieldName = "has_url";
+$this->hasUrl->aliasFieldName = "webcam_source_has_url";
+$this->hasUrl->label = "Has Url";
+$this->hasUrl->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "source";

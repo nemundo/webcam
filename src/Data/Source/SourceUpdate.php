@@ -17,6 +17,11 @@ public $source;
 */
 public $url;
 
+/**
+* @var bool
+*/
+public $hasUrl;
+
 public function __construct() {
 parent::__construct();
 $this->model = new SourceModel();
@@ -24,6 +29,7 @@ $this->model = new SourceModel();
 public function update() {
 $this->typeValueList->setModelValue($this->model->source, $this->source);
 $this->typeValueList->setModelValue($this->model->url, $this->url);
+$this->typeValueList->setModelValue($this->model->hasUrl, $this->hasUrl);
 parent::update();
 }
 }

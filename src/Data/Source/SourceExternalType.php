@@ -16,6 +16,11 @@ public $source;
 */
 public $url;
 
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $hasUrl;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = SourceModel::class;
@@ -44,6 +49,14 @@ $this->url->externalTableName = $this->externalTableName;
 $this->url->aliasFieldName = $this->url->tableName . "_" . $this->url->fieldName;
 $this->url->label = "Url";
 $this->addType($this->url);
+
+$this->hasUrl = new \Nemundo\Model\Type\Number\YesNoType();
+$this->hasUrl->fieldName = "has_url";
+$this->hasUrl->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->hasUrl->externalTableName = $this->externalTableName;
+$this->hasUrl->aliasFieldName = $this->hasUrl->tableName . "_" . $this->hasUrl->fieldName;
+$this->hasUrl->label = "Has Url";
+$this->addType($this->hasUrl);
 
 }
 }

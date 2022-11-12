@@ -19,7 +19,10 @@ class WebcamItem extends AbstractContentItem
 
     protected function onDataRow()
     {
-        $this->dataRow=(new WebcamReader())->getRowById($this->dataId);
+        $reader = new WebcamReader();
+        $reader->model->loadSource();
+        $reader->model->loadLatestImage();
+        $this->dataRow= $reader->getRowById($this->dataId);
     }
 
     /**

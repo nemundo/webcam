@@ -31,6 +31,7 @@ class WebcamCsvSite extends AbstractCsvSite
         $header = [];
         $header[] = 'webcam';
         $header[] = 'description';
+        $header[] = 'direction';
         $header[] = 'image_url';
         $header[] = 'lat';
         $header[] = 'lon';
@@ -49,6 +50,7 @@ class WebcamCsvSite extends AbstractCsvSite
             $data = [];
             $data[] = $webcamRow->webcam;
             $data[] = $webcamRow->description;
+            $data[] = $webcamRow->direction;
             $data[] = $webcamRow->geoCoordinate->latitude;
             $data[] = $webcamRow->geoCoordinate->longitude;
             $data[] = $webcamRow->imageUrl;

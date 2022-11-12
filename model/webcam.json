@@ -54,6 +54,20 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "image",
+                    "label": "Square Image",
+                    "field_name": "square_image",
+                    "variable_name": "squareImage",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "format": [
+                        {
+                            "format_type": "auto_size",
+                            "size": "500"
+                        }
+                    ]
                 }
             ],
             "index": [
@@ -95,6 +109,14 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Has Url",
+                    "field_name": "has_url",
+                    "variable_name": "hasUrl",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [
@@ -168,6 +190,23 @@
                     "variable_name": "geoCoordinate",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Latest Image",
+                    "field_name": "latest_image",
+                    "variable_name": "latestImage",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "dacbd15d-a124-4315-9aae-7ac0fdb1f180"
+                },
+                {
+                    "type": "yes_no",
+                    "label": "Active",
+                    "field_name": "active",
+                    "variable_name": "active",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [
@@ -176,6 +215,14 @@
                     "index_type": "unique_index",
                     "field_name": [
                         "image_url"
+                    ]
+                },
+                {
+                    "index_name": "active_webcam",
+                    "index_type": "index",
+                    "field_name": [
+                        "active",
+                        "webcam"
                     ]
                 }
             ]

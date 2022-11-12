@@ -41,6 +41,21 @@ public $source;
 */
 public $geoCoordinate;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $latestImageId;
+
+/**
+* @var \Nemundo\Webcam\Data\Image\ImageExternalType
+*/
+public $latestImage;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WebcamModel::class;
@@ -102,6 +117,21 @@ $this->geoCoordinate->label = "Geo Coordinate";
 $this->geoCoordinate->createObject();
 $this->addType($this->geoCoordinate);
 
+$this->latestImageId = new \Nemundo\Model\Type\Id\IdType();
+$this->latestImageId->fieldName = "latest_image";
+$this->latestImageId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->latestImageId->aliasFieldName = $this->latestImageId->tableName ."_".$this->latestImageId->fieldName;
+$this->latestImageId->label = "Latest Image";
+$this->addType($this->latestImageId);
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType();
+$this->active->fieldName = "active";
+$this->active->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->active->externalTableName = $this->externalTableName;
+$this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->fieldName;
+$this->active->label = "Active";
+$this->addType($this->active);
+
 }
 public function loadSource() {
 if ($this->source == null) {
@@ -111,6 +141,17 @@ $this->source->tableName = $this->parentFieldName . "_" . $this->externalTableNa
 $this->source->aliasFieldName = $this->source->tableName ."_".$this->source->fieldName;
 $this->source->label = "Source";
 $this->addType($this->source);
+}
+return $this;
+}
+public function loadLatestImage() {
+if ($this->latestImage == null) {
+$this->latestImage = new \Nemundo\Webcam\Data\Image\ImageExternalType(null, $this->parentFieldName . "_latest_image");
+$this->latestImage->fieldName = "latest_image";
+$this->latestImage->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->latestImage->aliasFieldName = $this->latestImage->tableName ."_".$this->latestImage->fieldName;
+$this->latestImage->label = "Latest Image";
+$this->addType($this->latestImage);
 }
 return $this;
 }

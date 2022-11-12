@@ -37,6 +37,16 @@ public $sourceId;
 */
 public $geoCoordinate;
 
+/**
+* @var string
+*/
+public $latestImageId;
+
+/**
+* @var bool
+*/
+public $active;
+
 public function __construct() {
 parent::__construct();
 $this->model = new WebcamModel();
@@ -52,6 +62,8 @@ if ($this-> geoCoordinate->hasValue()) {
 $property = new \Nemundo\Model\Data\Property\Geo\GeoCoordinateDataProperty($this->model->geoCoordinate, $this->typeValueList);
 $property->setValue($this->geoCoordinate);
 }
+$this->typeValueList->setModelValue($this->model->latestImageId, $this->latestImageId);
+$this->typeValueList->setModelValue($this->model->active, $this->active);
 parent::update();
 }
 }

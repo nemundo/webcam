@@ -9,5 +9,9 @@ $setup
     ->addPackage(new \Nemundo\Package\Framework\HtmlJsPackage())
     ->addPackage(new \Nemundo\Package\Framework\FrameworkJsPackage())
     ->addPackage(new \Nemundo\Package\Framework\FrameworkCssPackage())
-    ->addPackage(new \Nemundo\Package\FontAwesome\Package\FontAwesomePackage());
+    ->addPackage(new \Nemundo\Package\FontAwesome\Package\FontAwesomePackage())
+    ->addPackage(new \Nemundo\Package\OpenLayers\Package\OpenLayersPackage());
+    //->addPackage()
+
+;
 

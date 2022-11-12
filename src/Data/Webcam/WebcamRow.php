@@ -51,6 +51,21 @@ public $source;
 */
 public $geoCoordinate;
 
+/**
+* @var int
+*/
+public $latestImageId;
+
+/**
+* @var \Nemundo\Webcam\Data\Image\ImageRow
+*/
+public $latestImage;
+
+/**
+* @var bool
+*/
+public $active;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -65,8 +80,16 @@ $this->loadNemundoWebcamDataSourceSourcesourceRow($model->source);
 }
 $property = new \Nemundo\Model\Reader\Property\Geo\GeoCoordinateReaderProperty($row, $model->geoCoordinate);
 $this->geoCoordinate = $property->getValue();
+$this->latestImageId = intval($this->getModelValue($model->latestImageId));
+if ($model->latestImage !== null) {
+$this->loadNemundoWebcamDataImageImagelatestImageRow($model->latestImage);
+}
+$this->active = boolval($this->getModelValue($model->active));
 }
 private function loadNemundoWebcamDataSourceSourcesourceRow($model) {
 $this->source = new \Nemundo\Webcam\Data\Source\SourceRow($this->row, $model);
+}
+private function loadNemundoWebcamDataImageImagelatestImageRow($model) {
+$this->latestImage = new \Nemundo\Webcam\Data\Image\ImageRow($this->row, $model);
 }
 }

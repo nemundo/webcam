@@ -41,6 +41,21 @@ public $source;
 */
 public $geoCoordinate;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $latestImageId;
+
+/**
+* @var \Nemundo\Webcam\Data\Image\ImageExternalType
+*/
+public $latestImage;
+
+/**
+* @var \Nemundo\Model\Type\Number\YesNoType
+*/
+public $active;
+
 protected function loadModel() {
 $this->tableName = "webcam_webcam";
 $this->aliasTableName = "webcam_webcam";
@@ -105,9 +120,29 @@ $this->geoCoordinate->aliasFieldName = "webcam_webcam_geo_coordinate";
 $this->geoCoordinate->label = "Geo Coordinate";
 $this->geoCoordinate->allowNullValue = false;
 
+$this->latestImageId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->latestImageId->tableName = "webcam_webcam";
+$this->latestImageId->fieldName = "latest_image";
+$this->latestImageId->aliasFieldName = "webcam_webcam_latest_image";
+$this->latestImageId->label = "Latest Image";
+$this->latestImageId->allowNullValue = false;
+
+$this->active = new \Nemundo\Model\Type\Number\YesNoType($this);
+$this->active->tableName = "webcam_webcam";
+$this->active->externalTableName = "webcam_webcam";
+$this->active->fieldName = "active";
+$this->active->aliasFieldName = "webcam_webcam_active";
+$this->active->label = "Active";
+$this->active->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "image_url";
 $index->addType($this->imageUrl);
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "active_webcam";
+$index->addType($this->active);
+$index->addType($this->webcam);
 
 }
 public function loadSource() {
@@ -117,6 +152,16 @@ $this->source->tableName = "webcam_webcam";
 $this->source->fieldName = "source";
 $this->source->aliasFieldName = "webcam_webcam_source";
 $this->source->label = "Source";
+}
+return $this;
+}
+public function loadLatestImage() {
+if ($this->latestImage == null) {
+$this->latestImage = new \Nemundo\Webcam\Data\Image\ImageExternalType($this, "webcam_webcam_latest_image");
+$this->latestImage->tableName = "webcam_webcam";
+$this->latestImage->fieldName = "latest_image";
+$this->latestImage->aliasFieldName = "webcam_webcam_latest_image";
+$this->latestImage->label = "Latest Image";
 }
 return $this;
 }

@@ -35,6 +35,8 @@ class WebcamJsonSite extends AbstractJsonSite
 
             $data = [];
             $data['webcam'] = $webcamRow->webcam;
+            $data['description'] = $webcamRow->description;
+            $data['direction'] = $webcamRow->direction;
             $data['image_url'] = $webcamRow->imageUrl;
             $data['latitude'] = $webcamRow->geoCoordinate->latitude;
             $data['longitude'] = $webcamRow->geoCoordinate->longitude;

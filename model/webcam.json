@@ -83,6 +83,53 @@
         },
         {
             "template": "default",
+            "model_id": "1844a441-4e0c-47c9-98b6-127e3c7a43e0",
+            "label": "Log",
+            "class_name": "Log",
+            "table_name": "webcam_log",
+            "namespace": "Nemundo\\Webcam\\Data\\Log",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "created_user",
+                    "label": "User",
+                    "field_name": "user",
+                    "variable_name": "user",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "created_date_time",
+                    "label": "Date Time",
+                    "field_name": "date_time",
+                    "variable_name": "dateTime",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Webcam",
+                    "field_name": "webcam",
+                    "variable_name": "webcam",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "413f1498-48c5-4d84-ae23-fcccc51224e4"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "webcam",
+                    "index_type": "index",
+                    "field_name": [
+                        "webcam"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "6a1778db-9ea6-4637-b88b-250bd19e0437",
             "label": "Source",
             "class_name": "Source",
@@ -128,6 +175,29 @@
                     ]
                 }
             ]
+        },
+        {
+            "template": "default",
+            "model_id": "c5feaaea-ae8a-4e47-97ff-89d5aa4b513c",
+            "label": "Text Log",
+            "class_name": "TextLog",
+            "table_name": "webcam_text_log",
+            "namespace": "Nemundo\\Webcam\\Data\\TextLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Log",
+                    "field_name": "log",
+                    "variable_name": "log",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1844a441-4e0c-47c9-98b6-127e3c7a43e0"
+                }
+            ],
+            "index": []
         },
         {
             "template": "default",

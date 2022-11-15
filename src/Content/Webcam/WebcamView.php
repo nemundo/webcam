@@ -2,11 +2,14 @@
 
 namespace Nemundo\Webcam\Content\Webcam;
 
+use Nemundo\Admin\Com\Hyperlink\AdminSiteHyperlinkContainer;
 use Nemundo\Admin\Com\Image\AdminImage;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Content\View\AbstractContentView;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Webcam\Data\Image\ImageModel;
+use Nemundo\Webcam\Parameter\WebcamParameter;
+use Nemundo\Webcam\Site\WebcamItemSite;
 
 class WebcamView extends AbstractContentView
 {
@@ -28,7 +31,12 @@ class WebcamView extends AbstractContentView
         /*$img = new AdminImage($this);
         $img->src = $webcamRow->latestImage->image->getImageUrlWithDomain((new ImageModel())->imageAutoSize500);*/
 
-        $img = new AdminImage($this);
+
+        $hyperlink = new AdminSiteHyperlinkContainer($this);
+        $hyperlink->site = WebcamItemSite::$site;
+        $hyperlink->site->addParameter(new WebcamParameter($webcamRow->id));
+
+        $img = new AdminImage($hyperlink);
         $img->src = $webcamRow->latestImage->squareImage->getImageUrlWithDomain((new ImageModel())->imageAutoSize500);
 
 

@@ -4,6 +4,7 @@ namespace Nemundo\Webcam\Content\Webcam;
 
 use Nemundo\Content\Type\AbstractContentBuilder;
 use Nemundo\Core\Type\Geo\GeoCoordinate;
+use Nemundo\Webcam\Data\Log\Log;
 use Nemundo\Webcam\Data\Source\Source;
 use Nemundo\Webcam\Data\Source\SourceId;
 use Nemundo\Webcam\Data\Webcam\Webcam;
@@ -72,11 +73,15 @@ class WebcamBuilder extends AbstractContentBuilder
         $id->filter->andEqual($id->model->imageUrl, $this->imageUrl);
         $this->dataId = $id->getId();
 
+        $this->saveLog();
+
+
     }
 
 
     protected function onUpdate()
     {
+
 
         $update = new WebcamUpdate();
         $update->webcam = $this->webcam;
@@ -87,6 +92,27 @@ class WebcamBuilder extends AbstractContentBuilder
         //$update->sourceId = $sourceId;
         $update->updateById($this->dataId);
 
+
+        $this->saveLog();
+
+
     }
+
+
+    private function saveLog()
+    {
+
+        $data = new Log();
+        $data->webcamId = $this->dataId;
+        $logId = $data->save();
+
+
+
+
+
+        return $logId;
+
+    }
+
 
 }

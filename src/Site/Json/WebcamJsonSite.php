@@ -34,6 +34,7 @@ class WebcamJsonSite extends AbstractJsonSite
         foreach ($webcamReader->getData() as $webcamRow) {
 
             $data = [];
+            $data['id'] = $webcamRow->id;
             $data['webcam'] = $webcamRow->webcam;
             $data['description'] = $webcamRow->description;
             $data['direction'] = $webcamRow->direction;

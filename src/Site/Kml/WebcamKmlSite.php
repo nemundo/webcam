@@ -2,15 +2,10 @@
 
 namespace Nemundo\Webcam\Site\Kml;
 
-use Nemundo\Admin\Com\Image\AdminImage;
-use Nemundo\Admin\Com\Table\Row\AdminTableRow;
 use Nemundo\Admin\Site\AbstractKmlSite;
-use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Geo\Kml\Document\KmlDocument;
 use Nemundo\Geo\Kml\Object\KmlMarker;
 use Nemundo\Webcam\Content\Webcam\WebcamView;
-use Nemundo\Webcam\Data\Webcam\WebcamPaginationReader;
-use Nemundo\Webcam\Data\Webcam\WebcamReader;
 use Nemundo\Webcam\Reader\WebcamDataReader;
 
 class WebcamKmlSite extends AbstractKmlSite
@@ -24,7 +19,7 @@ class WebcamKmlSite extends AbstractKmlSite
     protected function loadSite()
     {
         parent::loadSite();
-        WebcamKmlSite::$site=$this;
+        WebcamKmlSite::$site = $this;
     }
 
 
@@ -32,6 +27,7 @@ class WebcamKmlSite extends AbstractKmlSite
     {
 
         $kml = new KmlDocument();
+        $kml->filename = 'webcam.kml';
 
         $webcamReader = new WebcamDataReader();
         $webcamReader->model->loadSource();
@@ -50,7 +46,6 @@ class WebcamKmlSite extends AbstractKmlSite
         }
 
         $kml->render();
-
 
     }
 

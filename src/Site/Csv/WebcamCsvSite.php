@@ -29,6 +29,7 @@ class WebcamCsvSite extends AbstractCsvSite
         $csv = new CsvDocument('webcam.csv');
 
         $header = [];
+        $header[] = 'id';
         $header[] = 'webcam';
         $header[] = 'description';
         $header[] = 'direction';
@@ -41,13 +42,12 @@ class WebcamCsvSite extends AbstractCsvSite
 
         $csv->addRow($header);
 
-
         $webcamReader = new WebcamDataReader();
         $webcamReader->model->loadSource();
-
         foreach ($webcamReader->getData() as $webcamRow) {
 
             $data = [];
+            $data[] = $webcamRow->id;
             $data[] = $webcamRow->webcam;
             $data[] = $webcamRow->description;
             $data[] = $webcamRow->direction;
@@ -62,7 +62,6 @@ class WebcamCsvSite extends AbstractCsvSite
         }
 
         $csv->render();
-
 
     }
 

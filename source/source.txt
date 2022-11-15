@@ -1,13 +1,53 @@
 https://brunni.ch/de/Info/webcam-wetter
 https://www.titlis.ch/de/live/webcams
 
-
-
-
-
+https://www.hfb.ch/de/ueber-uns/webcam
 
 
 https://www.titlis.ch/webcam/zoom/berghausjochpass.jpg
 
 
+
+
+
+
+
+
+Stanserhorn:
+https://www.stanserhorn.ch/informationen/wetter-webcam
+https://g0.ipcamlive.com/player/player.php?alias=solandmedia&autoplay=1
+
+https://s31.ipcamlive.com/streams/1fe6ztdgpso03pmkl/snapshot.jpg
+
+
+Klewenalp
+Junior Berg
+http://klewen.fortiddns.com:6080/mjpg/video.mjpg?resolution=1920x1080
+Chälen
+http://klewen.fortiddns.com:6180/mjpg/video.mjpg?resolution=1920x1080
+Stockhütte
+http://klewen.fortiddns.com:6280/mjpg/video.mjpg?resolution=1920x1080
+Klewenalp
+http://klewen.fortiddns.com:6380/mjpg/video.mjpg?resolution=1920x1080
+
+
+
+
+
+
+
+
+
+
+https://camserver.ch/FullScreen.aspx?cam=k73l
+
+https://camserver.ch/GetPic.aspx?cam=k73l
+
+https://camserver.ch/GetPic.aspx?cam=k78l
+
+
+
+
+https://camserver.ch/GetPic.aspx?pic=k73l_T221114_155959000.jpg
+https://camserver.ch/GetPic.aspx?cam=k73l
 

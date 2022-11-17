@@ -12,13 +12,13 @@ use Nemundo\Webcam\Application\WebcamApplication;
 use Nemundo\Webcam\Content\Webcam\WebcamType;
 use Nemundo\Webcam\Data\WebcamModelCollection;
 use Nemundo\Webcam\Scheduler\ImageCrawlerScheduler;
+use Nemundo\Webcam\Script\ImageCleanScript;
 use Nemundo\Webcam\Script\SourceImportScript;
 
 class WebcamInstall extends AbstractInstall
 {
     public function install()
     {
-
 
         (new ContentApplication())->installApp();
         //(new DatasetApplication())->installApp();
@@ -30,7 +30,8 @@ class WebcamInstall extends AbstractInstall
             ->addScheduler(new ImageCrawlerScheduler());
 
         (new ScriptSetup(new WebcamApplication()))
-        ->addScript(new SourceImportScript());
+            ->addScript(new SourceImportScript())
+            ->addScript(new ImageCleanScript());
 
         (new ContentTypeSetup(new WebcamApplication()))
             ->addContentType(new WebcamType());

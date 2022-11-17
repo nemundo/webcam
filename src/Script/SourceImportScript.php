@@ -19,6 +19,10 @@ class SourceImportScript extends AbstractConsoleScript
     {
 
 
+
+
+
+
         $filename = (new SourcePath())
             ->addPath('webcam.csv')
             ->getFullFilename();

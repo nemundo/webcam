@@ -56,6 +56,7 @@ class WebcamInstall extends AbstractInstall
     {
 
         $data = new PublicationStatus();
+        $data->updateOnDuplicate = true;
         $data->id = $publication->id;
         $data->publicationStatus = $publication->publicationStatus;
         $data->save();

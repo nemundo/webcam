@@ -56,6 +56,16 @@ public $latestImage;
 */
 public $active;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $publicationStatusId;
+
+/**
+* @var \Nemundo\Webcam\Data\PublicationStatus\PublicationStatusExternalType
+*/
+public $publicationStatus;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WebcamModel::class;
@@ -132,6 +142,13 @@ $this->active->aliasFieldName = $this->active->tableName . "_" . $this->active->
 $this->active->label = "Active";
 $this->addType($this->active);
 
+$this->publicationStatusId = new \Nemundo\Model\Type\Id\IdType();
+$this->publicationStatusId->fieldName = "publication_status";
+$this->publicationStatusId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->publicationStatusId->aliasFieldName = $this->publicationStatusId->tableName ."_".$this->publicationStatusId->fieldName;
+$this->publicationStatusId->label = "Publication Status";
+$this->addType($this->publicationStatusId);
+
 }
 public function loadSource() {
 if ($this->source == null) {
@@ -152,6 +169,17 @@ $this->latestImage->tableName = $this->parentFieldName . "_" . $this->externalTa
 $this->latestImage->aliasFieldName = $this->latestImage->tableName ."_".$this->latestImage->fieldName;
 $this->latestImage->label = "Latest Image";
 $this->addType($this->latestImage);
+}
+return $this;
+}
+public function loadPublicationStatus() {
+if ($this->publicationStatus == null) {
+$this->publicationStatus = new \Nemundo\Webcam\Data\PublicationStatus\PublicationStatusExternalType(null, $this->parentFieldName . "_publication_status");
+$this->publicationStatus->fieldName = "publication_status";
+$this->publicationStatus->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->publicationStatus->aliasFieldName = $this->publicationStatus->tableName ."_".$this->publicationStatus->fieldName;
+$this->publicationStatus->label = "Publication Status";
+$this->addType($this->publicationStatus);
 }
 return $this;
 }

@@ -47,6 +47,11 @@ public $latestImageId;
 */
 public $active;
 
+/**
+* @var string
+*/
+public $publicationStatusId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new WebcamModel();
@@ -64,6 +69,7 @@ $property->setValue($this->geoCoordinate);
 }
 $this->typeValueList->setModelValue($this->model->latestImageId, $this->latestImageId);
 $this->typeValueList->setModelValue($this->model->active, $this->active);
+$this->typeValueList->setModelValue($this->model->publicationStatusId, $this->publicationStatusId);
 parent::update();
 }
 }

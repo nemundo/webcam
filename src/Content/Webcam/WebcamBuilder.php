@@ -10,9 +10,12 @@ use Nemundo\Webcam\Data\Source\SourceId;
 use Nemundo\Webcam\Data\Webcam\Webcam;
 use Nemundo\Webcam\Data\Webcam\WebcamId;
 use Nemundo\Webcam\Data\Webcam\WebcamUpdate;
+use Nemundo\Webcam\Type\Publication\PublishedPublication;
 
 class WebcamBuilder extends AbstractContentBuilder
 {
+
+    public $publicationStatusId;
 
     public $webcam;
 
@@ -35,8 +38,12 @@ class WebcamBuilder extends AbstractContentBuilder
     protected function loadBuilder()
     {
         $this->contentType = new WebcamType();
+
+        $this->publicationStatusId = (new PublishedPublication())->id;
         $this->geoCoordinate = new GeoCoordinate();
+
     }
+
 
     protected function onCreate()
     {
@@ -59,6 +66,7 @@ class WebcamBuilder extends AbstractContentBuilder
 
         $data = new Webcam();
         $data->updateOnDuplicate = true;
+        $data->publicationStatusId = $this->publicationStatusId;
         $data->active = false;
         $data->webcam = $this->webcam;
         $data->description = $this->description;
@@ -82,8 +90,8 @@ class WebcamBuilder extends AbstractContentBuilder
     protected function onUpdate()
     {
 
-
         $update = new WebcamUpdate();
+        $update->publicationStatusId = $this->publicationStatusId;
         $update->webcam = $this->webcam;
         $update->description = $this->description;
         $update->direction = $this->direction;
@@ -92,9 +100,7 @@ class WebcamBuilder extends AbstractContentBuilder
         //$update->sourceId = $sourceId;
         $update->updateById($this->dataId);
 
-
         $this->saveLog();
-
 
     }
 
@@ -106,13 +112,8 @@ class WebcamBuilder extends AbstractContentBuilder
         $data->webcamId = $this->dataId;
         $logId = $data->save();
 
-
-
-
-
         return $logId;
 
     }
-
 
 }

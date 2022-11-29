@@ -8,10 +8,16 @@ use Nemundo\Admin\Com\ListBox\AdminNumberBox;
 use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Content\Form\AbstractContentForm;
 use Nemundo\Core\Type\Geo\GeoCoordinate;
+use Nemundo\Webcam\Com\ListBox\PublicationStatusListBox;
 use Nemundo\Webcam\Data\Webcam\WebcamModel;
 
 class WebcamForm extends AbstractContentForm
 {
+
+    /**
+     * @var PublicationStatusListBox
+     */
+    private $publicationStatus;
 
     /**
      * @var AdminTextBox
@@ -55,6 +61,9 @@ class WebcamForm extends AbstractContentForm
         $model = new WebcamModel();
         $model->loadSource();
 
+
+        $this->publicationStatus = new PublicationStatusListBox($this);
+
         $this->webcam = new AdminTextBox($this);
         $this->webcam->label = $model->webcam->label;
         $this->webcam->validation = true;
@@ -76,8 +85,8 @@ class WebcamForm extends AbstractContentForm
         $this->sourceUrl->label = 'Source Url';  // $model->webcam->label;
 
         $geoCoordinate = new GeoCoordinate();
-        $geoCoordinate->latitude=47.01955507337898;
-        $geoCoordinate->longitude=8.407829706475265;
+        $geoCoordinate->latitude = 47.01955507337898;
+        $geoCoordinate->longitude = 8.407829706475265;
 
         $this->geoCoordinate = new AdminGeoCoordinateTextBox($this);
         $this->geoCoordinate->label = $model->geoCoordinate->label;
@@ -93,6 +102,7 @@ class WebcamForm extends AbstractContentForm
 
         $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
 
+        $this->publicationStatus->value = $webcamRow->publicationStatusId;
         $this->webcam->value = $webcamRow->webcam;
         $this->description->value = $webcamRow->description;
         $this->direction->value = $webcamRow->direction;
@@ -108,6 +118,7 @@ class WebcamForm extends AbstractContentForm
     {
 
         $builder = new WebcamBuilder($this->dataId);
+        $builder->publicationStatusId = $this->publicationStatus->getValue();
         $builder->webcam = $this->webcam->getValue();
         $builder->description = $this->description->getValue();
         $builder->direction = $this->direction->getValue();

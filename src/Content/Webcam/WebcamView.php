@@ -6,6 +6,8 @@ use Nemundo\Admin\Com\Hyperlink\AdminSiteHyperlinkContainer;
 use Nemundo\Admin\Com\Image\AdminImage;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Content\View\AbstractContentView;
+use Nemundo\Core\Date\DateTimeDifference;
+use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Webcam\Data\Image\ImageModel;
 use Nemundo\Webcam\Parameter\WebcamParameter;
@@ -44,6 +46,15 @@ class WebcamView extends AbstractContentView
         $hyperlink->openNewWindow=true;
         $hyperlink->content = $webcamRow->source->source;
         $hyperlink->url = $webcamRow->source->url;
+
+
+        $difference = new DateTimeDifference();
+        $difference->dateFrom = $webcamRow->latestImage->dateTime;
+        $difference->dateUntil = (new DateTime())->setNow();
+
+        $p = new Paragraph($this);
+        $p->content = 'Vor '. $difference->getDifferenceInMinute().' Minuten';
+
 
 
         $p = new Paragraph($this);

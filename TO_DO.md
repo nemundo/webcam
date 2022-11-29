@@ -9,11 +9,11 @@
 - Source
 - Deaktivierung von Webcam
 - Region (nm-Region)
-- User für Source ("access_source_user")
+- User für Source ("access_source_user") / Bearbeiten nur für Source Owner
 - Last Change (User/DateTime)
 - Status (Entwurf/Published/Delete)
 - Workflow (Fehler entdeckt)
-- Workflow (Vorschlag für neue Kamera)
+- Workflow (Vorschlag für neue Kamera) / Webcam hinzufügen
 - Timelapse Video
 - Width/Height/Image Size
 - Aspect Ratio
@@ -21,6 +21,8 @@
 - Einfügen von POI's in Bild
 - Search in Admin
 - Fix Image Url (/latest/1200/rigi.jpg) 
+- DateTime bei Slider
+- Total Disk Space
 
 
 

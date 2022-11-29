@@ -130,6 +130,29 @@
         },
         {
             "template": "default",
+            "model_id": "1f55442a-74a4-4607-b014-639e821e2c20",
+            "label": "Publication Status",
+            "class_name": "PublicationStatus",
+            "table_name": "webcam_publication_status",
+            "namespace": "Nemundo\\Webcam\\Data\\PublicationStatus",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Publication Status",
+                    "field_name": "publication_status",
+                    "variable_name": "publicationStatus",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "6a1778db-9ea6-4637-b88b-250bd19e0437",
             "label": "Source",
             "class_name": "Source",
@@ -277,6 +300,15 @@
                     "variable_name": "active",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Publication Status",
+                    "field_name": "publication_status",
+                    "variable_name": "publicationStatus",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1f55442a-74a4-4607-b014-639e821e2c20"
                 }
             ],
             "index": [

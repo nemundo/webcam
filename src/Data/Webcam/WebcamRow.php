@@ -66,6 +66,16 @@ public $latestImage;
 */
 public $active;
 
+/**
+* @var int
+*/
+public $publicationStatusId;
+
+/**
+* @var \Nemundo\Webcam\Data\PublicationStatus\PublicationStatusRow
+*/
+public $publicationStatus;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -85,11 +95,18 @@ if ($model->latestImage !== null) {
 $this->loadNemundoWebcamDataImageImagelatestImageRow($model->latestImage);
 }
 $this->active = boolval($this->getModelValue($model->active));
+$this->publicationStatusId = intval($this->getModelValue($model->publicationStatusId));
+if ($model->publicationStatus !== null) {
+$this->loadNemundoWebcamDataPublicationStatusPublicationStatuspublicationStatusRow($model->publicationStatus);
+}
 }
 private function loadNemundoWebcamDataSourceSourcesourceRow($model) {
 $this->source = new \Nemundo\Webcam\Data\Source\SourceRow($this->row, $model);
 }
 private function loadNemundoWebcamDataImageImagelatestImageRow($model) {
 $this->latestImage = new \Nemundo\Webcam\Data\Image\ImageRow($this->row, $model);
+}
+private function loadNemundoWebcamDataPublicationStatusPublicationStatuspublicationStatusRow($model) {
+$this->publicationStatus = new \Nemundo\Webcam\Data\PublicationStatus\PublicationStatusRow($this->row, $model);
 }
 }

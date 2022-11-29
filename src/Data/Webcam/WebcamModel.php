@@ -56,6 +56,16 @@ public $latestImage;
 */
 public $active;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $publicationStatusId;
+
+/**
+* @var \Nemundo\Webcam\Data\PublicationStatus\PublicationStatusExternalType
+*/
+public $publicationStatus;
+
 protected function loadModel() {
 $this->tableName = "webcam_webcam";
 $this->aliasTableName = "webcam_webcam";
@@ -135,6 +145,13 @@ $this->active->aliasFieldName = "webcam_webcam_active";
 $this->active->label = "Active";
 $this->active->allowNullValue = false;
 
+$this->publicationStatusId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->publicationStatusId->tableName = "webcam_webcam";
+$this->publicationStatusId->fieldName = "publication_status";
+$this->publicationStatusId->aliasFieldName = "webcam_webcam_publication_status";
+$this->publicationStatusId->label = "Publication Status";
+$this->publicationStatusId->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "image_url";
 $index->addType($this->imageUrl);
@@ -162,6 +179,16 @@ $this->latestImage->tableName = "webcam_webcam";
 $this->latestImage->fieldName = "latest_image";
 $this->latestImage->aliasFieldName = "webcam_webcam_latest_image";
 $this->latestImage->label = "Latest Image";
+}
+return $this;
+}
+public function loadPublicationStatus() {
+if ($this->publicationStatus == null) {
+$this->publicationStatus = new \Nemundo\Webcam\Data\PublicationStatus\PublicationStatusExternalType($this, "webcam_webcam_publication_status");
+$this->publicationStatus->tableName = "webcam_webcam";
+$this->publicationStatus->fieldName = "publication_status";
+$this->publicationStatus->aliasFieldName = "webcam_webcam_publication_status";
+$this->publicationStatus->label = "Publication Status";
 }
 return $this;
 }

@@ -16,6 +16,7 @@ use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\Template\AbstractTemplateDocument;
 use Nemundo\Webcam\Com\ListBox\SourceListBox;
+use Nemundo\Webcam\Com\Tab\WebcamTab;
 use Nemundo\Webcam\Data\Image\ImageModel;
 use Nemundo\Webcam\Data\Webcam\WebcamPaginationReader;
 use Nemundo\Webcam\Parameter\WebcamParameter;
@@ -33,6 +34,8 @@ class WebcamPage extends AbstractTemplateDocument
     {
 
         $layout = new AdminFlexboxLayout($this);
+
+        new WebcamTab($layout);
 
         $form = new AdminSearchForm($layout);
 
@@ -60,10 +63,12 @@ class WebcamPage extends AbstractTemplateDocument
         $table = new AdminTable($layout);
 
         $webcamReader = new WebcamPaginationReader();
+        $webcamReader->model->loadPublicationStatus();
         $webcamReader->model->loadSource();
         $webcamReader->model->loadLatestImage();
 
         $header = new TableHeader($table);
+        $header->addText($webcamReader->model->publicationStatus->label);
         $header->addText($webcamReader->model->active->label);
         $header->addText($webcamReader->model->webcam->label);
         $header->addText($webcamReader->model->description->label);
@@ -78,8 +83,7 @@ class WebcamPage extends AbstractTemplateDocument
             //$row->addText($webcamRow->latestImage->image->getUrl());
 
             //$row->addText($webcamRow->webcam);
-            //$row->addText($webcamRow->source->source);
-
+            $row->addText($webcamRow->publicationStatus->publicationStatus);
             $row->addYesNo($webcamRow->active);
 
             $site = clone(WebcamItemSite::$site);

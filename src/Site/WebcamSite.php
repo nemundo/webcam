@@ -31,6 +31,7 @@ class WebcamSite extends AbstractSite
         new WebcamJsonSite($this);
         new WebcamKmlSite($this);
 
+        new SourceSite($this);
         new StatusSite($this);
 
 

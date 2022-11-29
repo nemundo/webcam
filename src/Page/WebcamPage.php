@@ -40,19 +40,18 @@ class WebcamPage extends AbstractTemplateDocument
         $form = new AdminSearchForm($layout);
 
         $source = new SourceListBox($form);
-        $source->submitOnChange=true;
-        $source->searchMode=true;
+        $source->submitOnChange = true;
+        $source->searchMode = true;
 
 
         $btn = new AdminIconSiteButton($layout);
-        $btn->site= WebcamNewSite::$site;
+        $btn->site = WebcamNewSite::$site;
 
         $btn = new AdminIconSiteButton($layout);
-        $btn->site= WebcamCsvSite::$site;
+        $btn->site = WebcamCsvSite::$site;
 
         $btn = new AdminIconSiteButton($layout);
-        $btn->site= WebcamKmlSite::$site;
-
+        $btn->site = WebcamKmlSite::$site;
 
 
         $copy = new CopyTextBox($layout);
@@ -67,14 +66,21 @@ class WebcamPage extends AbstractTemplateDocument
         $webcamReader->model->loadSource();
         $webcamReader->model->loadLatestImage();
 
+        if ($source->hasValue()) {
+            $webcamReader->filter->andEqual($webcamReader->model->sourceId, $source->getValue());
+        }
+
         $header = new TableHeader($table);
         $header->addText($webcamReader->model->publicationStatus->label);
         $header->addText($webcamReader->model->active->label);
+        $header->addEmpty();
+        $header->addText($webcamReader->model->latestImage->label);
         $header->addText($webcamReader->model->webcam->label);
         $header->addText($webcamReader->model->description->label);
         $header->addText($webcamReader->model->source->label);
         $header->addText($webcamReader->model->imageUrl->label);
-        $header->addText($webcamReader->model->geoCoordinate->label);
+        //$header->addText($webcamReader->model->geoCoordinate->label);
+        $header->addEmpty(2);
 
         foreach ($webcamReader->getData() as $webcamRow) {
 
@@ -93,16 +99,16 @@ class WebcamPage extends AbstractTemplateDocument
 
             if ($webcamRow->active) {
 
-            $hyperlink =new AdminSiteHyperlinkContainer($row);
-            $hyperlink->site = $site;
+                $hyperlink = new AdminSiteHyperlinkContainer($row);
+                $hyperlink->site = $site;
 
-            $model = new ImageModel();
+                $model = new ImageModel();
 
-            $img = new AdminImage($hyperlink);
-            //$img->src = $webcamRow->latestImage->image->getUrl();  // getImageUrl($model->imageAutoSize500);
-            $img->src = $webcamRow->latestImage->image->getImageUrl($model->imageAutoSize500);
+                $img = new AdminImage($hyperlink);
+                //$img->src = $webcamRow->latestImage->image->getUrl();  // getImageUrl($model->imageAutoSize500);
+                $img->src = $webcamRow->latestImage->image->getImageUrl($model->imageAutoSize500);
 
-            $row->addText($webcamRow->latestImage->dateTime->getShortDateTimeLeadingZeroFormat());
+                $row->addText($webcamRow->latestImage->dateTime->getShortDateTimeLeadingZeroFormat());
 
             } else {
 
@@ -114,16 +120,16 @@ class WebcamPage extends AbstractTemplateDocument
             $hyperlink->site = $site;
 
             $row->addText($webcamRow->description);
-            $row->addText($webcamRow->source->source);
+            //$row->addText($webcamRow->source->source);
 
             $url = new UrlHyperlink($row);
-            $url->openNewWindow= true;
-            $url->content = $webcamRow->source->url;
+            $url->openNewWindow = true;
+            $url->content = $webcamRow->source->source;  //$webcamRow->source->url;
             $url->url = $webcamRow->source->url;
 
 
             $url = new UrlHyperlink($row);
-            $url->openNewWindow= true;
+            $url->openNewWindow = true;
             $url->content = $webcamRow->imageUrl;
             $url->url = $webcamRow->imageUrl;
 

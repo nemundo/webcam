@@ -19,7 +19,8 @@ class WebcamImageCarousel extends AdminImageCarousel
         $reader->addOrder($reader->model->id, SortOrder::DESCENDING);
         $reader->limit = 30;
         foreach ($reader->getData() as $imageRow) {
-            $this->addImage($imageRow->image->getUrl());
+            //$this->addImage($imageRow->image->getUrl());
+            $this->addImage($imageRow->squareImage->getUrl());
         }
 
         return parent::getContent();

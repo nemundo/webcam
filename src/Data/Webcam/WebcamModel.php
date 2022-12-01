@@ -66,6 +66,21 @@ public $publicationStatusId;
 */
 public $publicationStatus;
 
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $imageWidth;
+
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $imageHeight;
+
+/**
+* @var \Nemundo\Model\Type\File\CroppingImageType
+*/
+public $croppingImage;
+
 protected function loadModel() {
 $this->tableName = "webcam_webcam";
 $this->aliasTableName = "webcam_webcam";
@@ -151,6 +166,30 @@ $this->publicationStatusId->fieldName = "publication_status";
 $this->publicationStatusId->aliasFieldName = "webcam_webcam_publication_status";
 $this->publicationStatusId->label = "Publication Status";
 $this->publicationStatusId->allowNullValue = false;
+
+$this->imageWidth = new \Nemundo\Model\Type\Number\NumberType($this);
+$this->imageWidth->tableName = "webcam_webcam";
+$this->imageWidth->externalTableName = "webcam_webcam";
+$this->imageWidth->fieldName = "image_width";
+$this->imageWidth->aliasFieldName = "webcam_webcam_image_width";
+$this->imageWidth->label = "Image Width";
+$this->imageWidth->allowNullValue = false;
+
+$this->imageHeight = new \Nemundo\Model\Type\Number\NumberType($this);
+$this->imageHeight->tableName = "webcam_webcam";
+$this->imageHeight->externalTableName = "webcam_webcam";
+$this->imageHeight->fieldName = "image_height";
+$this->imageHeight->aliasFieldName = "webcam_webcam_image_height";
+$this->imageHeight->label = "Image Height";
+$this->imageHeight->allowNullValue = false;
+
+$this->croppingImage = new \Nemundo\Model\Type\File\CroppingImageType($this);
+$this->croppingImage->tableName = "webcam_webcam";
+$this->croppingImage->externalTableName = "webcam_webcam";
+$this->croppingImage->fieldName = "cropping_image";
+$this->croppingImage->aliasFieldName = "webcam_webcam_cropping_image";
+$this->croppingImage->label = "Cropping Image";
+$this->croppingImage->allowNullValue = false;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "image_url";

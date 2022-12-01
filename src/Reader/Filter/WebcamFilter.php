@@ -2,6 +2,8 @@
 
 namespace Nemundo\Webcam\Reader\Filter;
 
+use Nemundo\Webcam\Type\Publication\PublishedPublication;
+
 trait WebcamFilter
 {
 
@@ -16,6 +18,7 @@ trait WebcamFilter
         $this->model->loadSource();
 
         if ($this->active !==null) {
+            $this->filter->andEqual($this->model->publicationStatusId,  (new PublishedPublication())->id);
             $this->filter->andEqual($this->model->active,$this->active);
         }
 

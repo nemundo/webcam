@@ -52,10 +52,26 @@ public $active;
 */
 public $publicationStatusId;
 
+/**
+* @var int
+*/
+public $imageWidth;
+
+/**
+* @var int
+*/
+public $imageHeight;
+
+/**
+* @var \Nemundo\Model\Data\Property\Image\CroppingImageDataProperty
+*/
+public $croppingImage;
+
 public function __construct() {
 parent::__construct();
 $this->model = new WebcamModel();
 $this->geoCoordinate = new \Nemundo\Core\Type\Geo\GeoCoordinate();
+$this->croppingImage = new \Nemundo\Model\Data\Property\Image\CroppingImageDataProperty($this->model->croppingImage, $this->typeValueList);
 }
 public function update() {
 $this->typeValueList->setModelValue($this->model->webcam, $this->webcam);
@@ -70,6 +86,8 @@ $property->setValue($this->geoCoordinate);
 $this->typeValueList->setModelValue($this->model->latestImageId, $this->latestImageId);
 $this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->publicationStatusId, $this->publicationStatusId);
+$this->typeValueList->setModelValue($this->model->imageWidth, $this->imageWidth);
+$this->typeValueList->setModelValue($this->model->imageHeight, $this->imageHeight);
 parent::update();
 }
 }

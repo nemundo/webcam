@@ -76,6 +76,21 @@ public $publicationStatusId;
 */
 public $publicationStatus;
 
+/**
+* @var int
+*/
+public $imageWidth;
+
+/**
+* @var int
+*/
+public $imageHeight;
+
+/**
+* @var \Nemundo\Model\Reader\Property\File\CroppingImageReaderProperty
+*/
+public $croppingImage;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -99,6 +114,9 @@ $this->publicationStatusId = intval($this->getModelValue($model->publicationStat
 if ($model->publicationStatus !== null) {
 $this->loadNemundoWebcamDataPublicationStatusPublicationStatuspublicationStatusRow($model->publicationStatus);
 }
+$this->imageWidth = intval($this->getModelValue($model->imageWidth));
+$this->imageHeight = intval($this->getModelValue($model->imageHeight));
+$this->croppingImage = new \Nemundo\Model\Reader\Property\File\CroppingImageReaderProperty($row, $model->croppingImage);
 }
 private function loadNemundoWebcamDataSourceSourcesourceRow($model) {
 $this->source = new \Nemundo\Webcam\Data\Source\SourceRow($this->row, $model);

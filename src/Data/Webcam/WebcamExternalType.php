@@ -66,6 +66,21 @@ public $publicationStatusId;
 */
 public $publicationStatus;
 
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $imageWidth;
+
+/**
+* @var \Nemundo\Model\Type\Number\NumberType
+*/
+public $imageHeight;
+
+/**
+* @var \Nemundo\Model\Type\File\CroppingImageType
+*/
+public $croppingImage;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WebcamModel::class;
@@ -148,6 +163,31 @@ $this->publicationStatusId->tableName = $this->parentFieldName . "_" . $this->ex
 $this->publicationStatusId->aliasFieldName = $this->publicationStatusId->tableName ."_".$this->publicationStatusId->fieldName;
 $this->publicationStatusId->label = "Publication Status";
 $this->addType($this->publicationStatusId);
+
+$this->imageWidth = new \Nemundo\Model\Type\Number\NumberType();
+$this->imageWidth->fieldName = "image_width";
+$this->imageWidth->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->imageWidth->externalTableName = $this->externalTableName;
+$this->imageWidth->aliasFieldName = $this->imageWidth->tableName . "_" . $this->imageWidth->fieldName;
+$this->imageWidth->label = "Image Width";
+$this->addType($this->imageWidth);
+
+$this->imageHeight = new \Nemundo\Model\Type\Number\NumberType();
+$this->imageHeight->fieldName = "image_height";
+$this->imageHeight->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->imageHeight->externalTableName = $this->externalTableName;
+$this->imageHeight->aliasFieldName = $this->imageHeight->tableName . "_" . $this->imageHeight->fieldName;
+$this->imageHeight->label = "Image Height";
+$this->addType($this->imageHeight);
+
+$this->croppingImage = new \Nemundo\Model\Type\File\CroppingImageType();
+$this->croppingImage->fieldName = "cropping_image";
+$this->croppingImage->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->croppingImage->externalTableName = $this->externalTableName;
+$this->croppingImage->aliasFieldName = $this->croppingImage->tableName . "_" . $this->croppingImage->fieldName;
+$this->croppingImage->label = "Cropping Image";
+$this->croppingImage->createObject();
+$this->addType($this->croppingImage);
 
 }
 public function loadSource() {

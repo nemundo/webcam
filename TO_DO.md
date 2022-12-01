@@ -15,7 +15,13 @@
 - Workflow (Fehler entdeckt)
 - Workflow (Vorschlag für neue Kamera) / Webcam hinzufügen
 - Timelapse Video
+- 
+- 
+- 
+- 
+- 
 - Width/Height/Image Size
+
 - Aspect Ratio
 - Archiv Funktionalität
 - Einfügen von POI's in Bild
@@ -23,6 +29,7 @@
 - Fix Image Url (/latest/1200/rigi.jpg) 
 - DateTime bei Slider
 - Total Disk Space
+- Comment
 
 
 

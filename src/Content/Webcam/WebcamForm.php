@@ -9,7 +9,9 @@ use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Content\Form\AbstractContentForm;
 use Nemundo\Core\Type\Geo\GeoCoordinate;
 use Nemundo\Webcam\Com\ListBox\PublicationStatusListBox;
+use Nemundo\Webcam\Com\ListBox\SourceListBox;
 use Nemundo\Webcam\Data\Webcam\WebcamModel;
+use Nemundo\Webcam\Type\Publication\DraftPublication;
 
 class WebcamForm extends AbstractContentForm
 {
@@ -40,14 +42,19 @@ class WebcamForm extends AbstractContentForm
     private $imageUrl;
 
     /**
-     * @var AdminTextBox
+     * @var SourceListBox
      */
-    private $source;
+    private $sourceList;
 
     /**
      * @var AdminTextBox
      */
-    private $sourceUrl;
+    //private $source;
+
+    /**
+     * @var AdminTextBox
+     */
+    //private $sourceUrl;
 
     /**
      * @var AdminGeoCoordinateTextBox
@@ -61,8 +68,8 @@ class WebcamForm extends AbstractContentForm
         $model = new WebcamModel();
         $model->loadSource();
 
-
         $this->publicationStatus = new PublicationStatusListBox($this);
+        $this->publicationStatus->value = (new DraftPublication())->id;
 
         $this->webcam = new AdminTextBox($this);
         $this->webcam->label = $model->webcam->label;
@@ -78,11 +85,13 @@ class WebcamForm extends AbstractContentForm
         $this->imageUrl->label = $model->imageUrl->label;
         $this->imageUrl->validation = true;
 
-        $this->source = new AdminTextBox($this);
+        $this->sourceList = new SourceListBox($this);
+
+        /*$this->source = new AdminTextBox($this);
         $this->source->label = $model->source->label;
 
         $this->sourceUrl = new AdminTextBox($this);
-        $this->sourceUrl->label = 'Source Url';  // $model->webcam->label;
+        $this->sourceUrl->label = 'Source Url';  // $model->webcam->label;*/
 
         $geoCoordinate = new GeoCoordinate();
         $geoCoordinate->latitude = 47.01955507337898;
@@ -107,8 +116,9 @@ class WebcamForm extends AbstractContentForm
         $this->description->value = $webcamRow->description;
         $this->direction->value = $webcamRow->direction;
         $this->imageUrl->value = $webcamRow->imageUrl;
-        $this->source->value = $webcamRow->source->source;
-        $this->sourceUrl->value = $webcamRow->source->url;
+        $this->sourceList->value = $webcamRow->sourceId;
+        /*$this->source->value = $webcamRow->source->source;
+        $this->sourceUrl->value = $webcamRow->source->url;*/
         $this->geoCoordinate->setGeoCoordinate($webcamRow->geoCoordinate);
 
     }
@@ -123,8 +133,9 @@ class WebcamForm extends AbstractContentForm
         $builder->description = $this->description->getValue();
         $builder->direction = $this->direction->getValue();
         $builder->imageUrl = $this->imageUrl->getValue();
-        $builder->source = $this->source->getValue();
-        $builder->sourceUrl = $this->sourceUrl->getValue();
+        $builder->sourceId = $this->sourceList->getValue();
+        /*$builder->source = $this->source->getValue();
+        $builder->sourceUrl = $this->sourceUrl->getValue();*/
         $builder->geoCoordinate = $this->geoCoordinate->getGeoCoordinate();
         $builder->buildContent();
 

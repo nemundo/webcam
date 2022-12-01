@@ -15,17 +15,22 @@ use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\Template\AbstractTemplateDocument;
+use Nemundo\Webcam\Com\ListBox\PublicationStatusListBox;
 use Nemundo\Webcam\Com\ListBox\SourceListBox;
 use Nemundo\Webcam\Com\Tab\WebcamTab;
 use Nemundo\Webcam\Data\Image\ImageModel;
 use Nemundo\Webcam\Data\Webcam\WebcamPaginationReader;
+use Nemundo\Webcam\Parameter\SourceParameter;
 use Nemundo\Webcam\Parameter\WebcamParameter;
 use Nemundo\Webcam\Site\Csv\WebcamCsvSite;
+use Nemundo\Webcam\Site\ImageCroppingSite;
+use Nemundo\Webcam\Site\ImageDeleteSite;
 use Nemundo\Webcam\Site\Json\WebcamJsonSite;
 use Nemundo\Webcam\Site\Kml\WebcamKmlSite;
 use Nemundo\Webcam\Site\WebcamDeleteSite;
 use Nemundo\Webcam\Site\WebcamEditSite;
 use Nemundo\Webcam\Site\WebcamItemSite;
+use Nemundo\Webcam\Site\WebcamLogSite;
 use Nemundo\Webcam\Site\WebcamNewSite;
 
 class WebcamPage extends AbstractTemplateDocument
@@ -43,6 +48,9 @@ class WebcamPage extends AbstractTemplateDocument
         $source->submitOnChange = true;
         $source->searchMode = true;
 
+        $publicationStatus = new PublicationStatusListBox($form);
+        $publicationStatus->submitOnChange= true;
+        $publicationStatus->searchMode= true;
 
         $btn = new AdminIconSiteButton($layout);
         $btn->site = WebcamNewSite::$site;
@@ -54,9 +62,13 @@ class WebcamPage extends AbstractTemplateDocument
         $btn->site = WebcamKmlSite::$site;
 
 
+
+        $site = clone(WebcamJsonSite::$site);
+        $site->addParameter(new SourceParameter());
+
         $copy = new CopyTextBox($layout);
         $copy->label = 'Json Web Service';
-        $copy->value = WebcamJsonSite::$site->getUrlWithDomain();
+        $copy->value = $site->getUrlWithDomain();
 
 
         $table = new AdminTable($layout);
@@ -66,9 +78,16 @@ class WebcamPage extends AbstractTemplateDocument
         $webcamReader->model->loadSource();
         $webcamReader->model->loadLatestImage();
 
+        if ($publicationStatus->hasValue()) {
+            $webcamReader->filter->andEqual($webcamReader->model->publicationStatusId, $publicationStatus->getValue());
+        }
+
         if ($source->hasValue()) {
             $webcamReader->filter->andEqual($webcamReader->model->sourceId, $source->getValue());
         }
+
+
+
 
         $header = new TableHeader($table);
         $header->addText($webcamReader->model->publicationStatus->label);
@@ -77,6 +96,8 @@ class WebcamPage extends AbstractTemplateDocument
         $header->addText($webcamReader->model->latestImage->label);
         $header->addText($webcamReader->model->webcam->label);
         $header->addText($webcamReader->model->description->label);
+        $header->addText($webcamReader->model->imageWidth->label);
+        $header->addText($webcamReader->model->imageHeight->label);
         $header->addText($webcamReader->model->source->label);
         $header->addText($webcamReader->model->imageUrl->label);
         //$header->addText($webcamReader->model->geoCoordinate->label);
@@ -86,7 +107,9 @@ class WebcamPage extends AbstractTemplateDocument
 
             $row = new AdminTableRow($table);
 
-            //$row->addText($webcamRow->latestImage->image->getUrl());
+
+            $row->addText($webcamRow->croppingImage->getCroppingDimension()->width);
+
 
             //$row->addText($webcamRow->webcam);
             $row->addText($webcamRow->publicationStatus->publicationStatus);
@@ -97,7 +120,7 @@ class WebcamPage extends AbstractTemplateDocument
             $site->title = $webcamRow->webcam;
 
 
-            if ($webcamRow->active) {
+            //if ($webcamRow->active) {
 
                 $hyperlink = new AdminSiteHyperlinkContainer($row);
                 $hyperlink->site = $site;
@@ -105,21 +128,27 @@ class WebcamPage extends AbstractTemplateDocument
                 $model = new ImageModel();
 
                 $img = new AdminImage($hyperlink);
-                //$img->src = $webcamRow->latestImage->image->getUrl();  // getImageUrl($model->imageAutoSize500);
                 $img->src = $webcamRow->latestImage->image->getImageUrl($model->imageAutoSize500);
+
+            $img = new AdminImage($hyperlink);
+            $img->src = $webcamRow->latestImage->squareImage->getImageUrl($model->squareImageAutoSize500);
 
                 $row->addText($webcamRow->latestImage->dateTime->getShortDateTimeLeadingZeroFormat());
 
-            } else {
+            /*} else {
 
                 $row->addEmpty(2);
 
-            }
+            }*/
 
             $hyperlink = new SiteHyperlink($row);
             $hyperlink->site = $site;
 
             $row->addText($webcamRow->description);
+
+            $row->addText($webcamRow->imageWidth);
+            $row->addText($webcamRow->imageHeight);
+
             //$row->addText($webcamRow->source->source);
 
             $url = new UrlHyperlink($row);
@@ -130,14 +159,31 @@ class WebcamPage extends AbstractTemplateDocument
 
             $url = new UrlHyperlink($row);
             $url->openNewWindow = true;
-            $url->content = $webcamRow->imageUrl;
+            $url->content = 'Bild';  // $webcamRow->imageUrl;
             $url->url = $webcamRow->imageUrl;
 
             //$row->addText($webcamRow->geoCoordinate->getText());
 
+
+            $site = clone(ImageCroppingSite::$site);
+            $site->addParameter(new WebcamParameter($webcamRow->id));
+            $row->addSite($site);
+
+
+            $site = clone(WebcamLogSite::$site);
+            $site->addParameter(new WebcamParameter($webcamRow->id));
+            $row->addSite($site);
+
+
             $site = clone(WebcamEditSite::$site);
             $site->addParameter(new WebcamParameter($webcamRow->id));
             $row->addIconSite($site);
+
+
+            $site = clone(ImageDeleteSite::$site);
+            $site->addParameter(new WebcamParameter($webcamRow->id));
+            $row->addIconSite($site);
+
 
             $site = clone(WebcamDeleteSite::$site);
             $site->addParameter(new WebcamParameter($webcamRow->id));

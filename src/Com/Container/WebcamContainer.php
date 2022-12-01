@@ -18,6 +18,7 @@ class WebcamContainer extends AbstractHtmlContainer
         $layout = new AdminRowFlexLayout($this);
 
         $webcamReader = new WebcamDataPaginationReader();
+
         $webcamReader->active = true;
         foreach ($webcamReader->getData() as $webcamRow) {
 

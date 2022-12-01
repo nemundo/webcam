@@ -6,6 +6,36 @@
     "model": [
         {
             "template": "default",
+            "model_id": "ee315d9b-6e5c-44c3-bd5d-5a1acfb67b1e",
+            "label": "Geo Coordinate Change Log",
+            "class_name": "GeoCoordinateChangeLog",
+            "table_name": "webcam_geo_coordinate_change_log",
+            "namespace": "Nemundo\\Webcam\\Data\\GeoCoordinateChangeLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "geo_coordinate",
+                    "label": "Geo Coordinate Old",
+                    "field_name": "geo_coordinate_old",
+                    "variable_name": "geoCoordinateOld",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "geo_coordinate",
+                    "label": "Geo Coordinate New",
+                    "field_name": "geo_coordinate_new",
+                    "variable_name": "geoCoordinateNew",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "dacbd15d-a124-4315-9aae-7ac0fdb1f180",
             "label": "Image",
             "class_name": "Image",
@@ -130,6 +160,74 @@
         },
         {
             "template": "default",
+            "model_id": "67497d7a-35ed-466f-9e84-044d6458028d",
+            "label": "Log Item",
+            "class_name": "LogItem",
+            "table_name": "webcam_log_item",
+            "namespace": "Nemundo\\Webcam\\Data\\LogItem",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Log",
+                    "field_name": "log",
+                    "variable_name": "log",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1844a441-4e0c-47c9-98b6-127e3c7a43e0"
+                },
+                {
+                    "type": "external",
+                    "label": "Log Type",
+                    "field_name": "log_type",
+                    "variable_name": "logType",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "00e38745-b06a-439b-a5c8-09dc9d22177d"
+                },
+                {
+                    "type": "number",
+                    "label": "Data Id",
+                    "field_name": "data_id",
+                    "variable_name": "dataId",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "large_text",
+                    "label": "Text",
+                    "field_name": "text",
+                    "variable_name": "text",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "log",
+                    "index_type": "index",
+                    "field_name": [
+                        "log"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
+            "model_id": "00e38745-b06a-439b-a5c8-09dc9d22177d",
+            "label": "Log Type",
+            "class_name": "LogType",
+            "table_name": "webcam_log_type",
+            "namespace": "Nemundo\\Webcam\\Data\\LogType",
+            "row_class_name": "",
+            "primary_index": "number_id",
+            "is_deleted": false,
+            "index": []
+        },
+        {
+            "template": "default",
             "model_id": "1f55442a-74a4-4607-b014-639e821e2c20",
             "label": "Publication Status",
             "class_name": "PublicationStatus",
@@ -147,6 +245,47 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "length": "255"
+                }
+            ],
+            "index": []
+        },
+        {
+            "template": "default",
+            "model_id": "b95ccb75-3ebc-4c59-b59d-718c325df95c",
+            "label": "Publication Status Log",
+            "class_name": "PublicationStatusLog",
+            "table_name": "webcam_publication_status_log",
+            "namespace": "Nemundo\\Webcam\\Data\\PublicationStatusLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "external",
+                    "label": "Log",
+                    "field_name": "log",
+                    "variable_name": "log",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1844a441-4e0c-47c9-98b6-127e3c7a43e0"
+                },
+                {
+                    "type": "external",
+                    "label": "Publication Status Old",
+                    "field_name": "publication_status_old",
+                    "variable_name": "publicationStatusOld",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1f55442a-74a4-4607-b014-639e821e2c20"
+                },
+                {
+                    "type": "external",
+                    "label": "Publication Status New",
+                    "field_name": "publication_status_new",
+                    "variable_name": "publicationStatusNew",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "1f55442a-74a4-4607-b014-639e821e2c20"
                 }
             ],
             "index": []
@@ -198,6 +337,18 @@
                     ]
                 }
             ]
+        },
+        {
+            "template": "default",
+            "model_id": "912d0079-9852-44b7-bae0-66553038a3db",
+            "label": "Text Change Log",
+            "class_name": "TextChangeLog",
+            "table_name": "webcam_text_change_log",
+            "namespace": "Nemundo\\Webcam\\Data\\TextChangeLog",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "index": []
         },
         {
             "template": "default",
@@ -309,6 +460,30 @@
                     "allow_null": false,
                     "is_deleted": false,
                     "external_model_id": "1f55442a-74a4-4607-b014-639e821e2c20"
+                },
+                {
+                    "type": "number",
+                    "label": "Image Width",
+                    "field_name": "image_width",
+                    "variable_name": "imageWidth",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "number",
+                    "label": "Image Height",
+                    "field_name": "image_height",
+                    "variable_name": "imageHeight",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "cropping_image",
+                    "label": "Cropping Image",
+                    "field_name": "cropping_image",
+                    "variable_name": "croppingImage",
+                    "allow_null": false,
+                    "is_deleted": false
                 }
             ],
             "index": [

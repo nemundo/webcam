@@ -5,7 +5,9 @@ namespace Nemundo\Webcam\Site;
 use Nemundo\Admin\Site\AbstractDeleteIconSite;
 use Nemundo\Core\Http\Url\UrlReferer;
 use Nemundo\Webcam\Content\Webcam\WebcamRemove;
+use Nemundo\Webcam\Data\Webcam\WebcamUpdate;
 use Nemundo\Webcam\Parameter\WebcamParameter;
+use Nemundo\Webcam\Type\Publication\DeletePublication;
 
 class WebcamDeleteSite extends AbstractDeleteIconSite
 {
@@ -26,7 +28,11 @@ class WebcamDeleteSite extends AbstractDeleteIconSite
     {
 
         $webcamId = (new WebcamParameter())->getValue();
-        (new WebcamRemove($webcamId))->removeItem();
+        //(new WebcamRemove($webcamId))->removeItem();
+
+        $update = new WebcamUpdate();
+        $update->publicationStatusId = (new DeletePublication())->id;
+        $update->updateById($webcamId);
 
         (new UrlReferer())->redirect();
 

@@ -12,4 +12,20 @@ class WebcamConfig
      */
     public static $defaultGeoCoordinate;
 
+    /**
+     * @var int
+     */
+    public static $inactiveAfterMinute = 30;
+
+    /**
+     * @var int
+     */
+    public static $aspectRatioWidth = 16;
+
+    /**
+     * @var int
+     */
+    public static $aspectRatioHeight = 9;
+
+
 }

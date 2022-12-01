@@ -30,7 +30,8 @@ class WebcamKmlSite extends AbstractKmlSite
         $kml->filename = 'webcam.kml';
 
         $webcamReader = new WebcamDataReader();
-        $webcamReader->model->loadSource();
+        $webcamReader->active = true;
+//        $webcamReader->model->loadSource();
 
         foreach ($webcamReader->getData() as $webcamRow) {
 

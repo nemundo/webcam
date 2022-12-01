@@ -26,6 +26,10 @@ class WebcamSite extends AbstractSite
         new WebcamEditSite($this);
         new WebcamDeleteSite($this);
         new WebcamItemSite($this);
+        new ImageCroppingSite($this);
+        new WebcamLogSite($this);
+
+        new ImageDeleteSite($this);
 
         new WebcamCsvSite($this);
         new WebcamJsonSite($this);

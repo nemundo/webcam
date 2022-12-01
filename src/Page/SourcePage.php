@@ -8,6 +8,7 @@ use Nemundo\Admin\Com\Table\AdminTableHeader;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
 use Nemundo\Com\Template\AbstractTemplateDocument;
 use Nemundo\Webcam\Com\Tab\WebcamTab;
+use Nemundo\Webcam\Content\Source\SourceType;
 use Nemundo\Webcam\Data\Source\SourceReader;
 
 class SourcePage extends AbstractTemplateDocument
@@ -19,7 +20,10 @@ class SourcePage extends AbstractTemplateDocument
 
         new WebcamTab($layout);
 
-        $table = new AdminTable($layout);
+        (new SourceType())->getAdmin($layout);
+
+
+/*        $table = new AdminTable($layout);
 
         $sourceReader = new SourceReader();
 
@@ -34,7 +38,7 @@ class SourcePage extends AbstractTemplateDocument
             $row->addText($sourceRow->source);
             $row->addText($sourceRow->url);
 
-        }
+        }*/
 
         return parent::getContent();
 

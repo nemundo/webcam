@@ -16,6 +16,7 @@ use Nemundo\Webcam\Scheduler\ImageCrawlerScheduler;
 use Nemundo\Webcam\Scheduler\ImageDeleteScheduler;
 use Nemundo\Webcam\Script\ImageCleanScript;
 use Nemundo\Webcam\Script\SourceImportScript;
+use Nemundo\Webcam\Script\WebcamCleanScript;
 use Nemundo\Webcam\Type\Publication\AbstractPublication;
 use Nemundo\Webcam\Type\Publication\DeletePublication;
 use Nemundo\Webcam\Type\Publication\DraftPublication;
@@ -38,7 +39,8 @@ class WebcamInstall extends AbstractInstall
 
         (new ScriptSetup(new WebcamApplication()))
             ->addScript(new SourceImportScript())
-            ->addScript(new ImageCleanScript());
+            ->addScript(new ImageCleanScript())
+            ->addScript(new WebcamCleanScript());
 
         (new ContentTypeSetup(new WebcamApplication()))
             ->addContentType(new WebcamType());

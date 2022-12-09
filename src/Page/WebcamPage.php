@@ -8,6 +8,7 @@ use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Hyperlink\AdminSiteHyperlinkContainer;
 use Nemundo\Admin\Com\Image\AdminImage;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
+use Nemundo\Admin\Com\Layout\Flex\AdminRowFlexLayout;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
@@ -52,13 +53,16 @@ class WebcamPage extends AbstractTemplateDocument
         $publicationStatus->submitOnChange= true;
         $publicationStatus->searchMode= true;
 
-        $btn = new AdminIconSiteButton($layout);
+        $rowLayout = new AdminRowFlexLayout($layout);
+
+
+        $btn = new AdminIconSiteButton($rowLayout);
         $btn->site = WebcamNewSite::$site;
 
-        $btn = new AdminIconSiteButton($layout);
+        $btn = new AdminIconSiteButton($rowLayout);
         $btn->site = WebcamCsvSite::$site;
 
-        $btn = new AdminIconSiteButton($layout);
+        $btn = new AdminIconSiteButton($rowLayout);
         $btn->site = WebcamKmlSite::$site;
 
 
@@ -66,7 +70,7 @@ class WebcamPage extends AbstractTemplateDocument
         $site = clone(WebcamJsonSite::$site);
         $site->addParameter(new SourceParameter());
 
-        $copy = new CopyTextBox($layout);
+        $copy = new CopyTextBox($rowLayout);
         $copy->label = 'Json Web Service';
         $copy->value = $site->getUrlWithDomain();
 

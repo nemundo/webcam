@@ -127,7 +127,9 @@ class WebcamBuilder extends AbstractContentBuilder
         $data->text = (new GeoCoordinateChangeLogType())->getText($dataId);
         $data->save();
 
-        $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
+        $this->downloadImage();
+
+        /*$webcamRow = (new WebcamItem($this->dataId))->getDataRow();
         (new WebcamImageImport())->importImgae($webcamRow);
 
         $filename = (new WebcamItem($this->dataId))->getDataRow()->latestImage->image->getFullFilename();
@@ -138,12 +140,7 @@ class WebcamBuilder extends AbstractContentBuilder
 
         $update = new WebcamUpdate();
         $update->croppingImage->saveCroppingDimension($maxCropping->getCroppingDimension());
-        $update->updateById($webcamRow->id);
-
-
-
-
-
+        $update->updateById($webcamRow->id);*/
 
     }
 
@@ -200,6 +197,30 @@ class WebcamBuilder extends AbstractContentBuilder
         }
 
 
+
+
+        if ($webcamOldRow->imageUrl !== $this->imageUrl) {
+
+            $this->downloadImage();
+
+            /*$data = new GeoCoordinateChangeLog();
+            $data->geoCoordinateOld = $webcamOldRow->geoCoordinate;
+            $data->geoCoordinateNew = $this->geoCoordinate;
+            $dataId = $data->save();*/
+
+            $data = new LogItem();
+            $data->logId = $logId;
+            $data->dataId = $dataId;
+            $data->text = 'image url change';  // (new GeoCoordinateChangeLogType())->getText($dataId);
+            $data->save();
+
+        }
+
+
+
+
+
+
     }
 
 
@@ -213,5 +234,29 @@ class WebcamBuilder extends AbstractContentBuilder
         return $logId;
 
     }
+
+
+
+    private function downloadImage() {
+
+        $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
+        (new WebcamImageImport())->importImgae($webcamRow);
+
+        $filename = (new WebcamItem($this->dataId))->getDataRow()->latestImage->image->getFullFilename();
+
+        $maxCropping = new MaxImageCropping($filename);
+        $maxCropping->aspectRatioWidth = WebcamConfig::$aspectRatioWidth;
+        $maxCropping->aspectRatioHeight = WebcamConfig::$aspectRatioHeight;
+
+        $update = new WebcamUpdate();
+        $update->croppingImage->saveCroppingDimension($maxCropping->getCroppingDimension());
+        $update->updateById($webcamRow->id);
+
+
+
+    }
+
+
+
 
 }

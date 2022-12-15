@@ -19,6 +19,6 @@ class WebcamApplication extends AbstractApplication
         $this->installClass = WebcamInstall::class;
         $this->uninstallClass = WebcamUninstall::class;
         $this->appSiteClass = WebcamSite::class;
-        $this->publicSiteClass = WebcamItemSite::$site;
+        $this->publicSiteClass = WebcamItemSite::class;
     }
 }

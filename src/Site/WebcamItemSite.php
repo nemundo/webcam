@@ -16,7 +16,7 @@ class WebcamItemSite extends AbstractSite
     protected function loadSite()
     {
         $this->title = 'WebcamItem';
-        $this->url = 'WebcamItem';
+        $this->url = 'webcam-item';
         $this->menuActive = false;
 
         WebcamItemSite::$site = $this;

@@ -15,7 +15,9 @@ trait WebcamFilter
 
     protected function loadFilter() {
 
-        $this->model->loadSource();
+        //$this->model->loadSource();
+        $this->model->loadLatestImage();
+
 
         if ($this->active !==null) {
             $this->filter->andEqual($this->model->publicationStatusId,  (new PublishedPublication())->id);

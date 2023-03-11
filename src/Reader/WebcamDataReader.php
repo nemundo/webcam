@@ -17,7 +17,7 @@ class WebcamDataReader extends WebcamReader
 
         //$webcamReader->model->loadSource();
 
-        $this->model->loadSource();
+        //$this->model->loadSource();
         //$this->addOrder($this->model->webcam);*/
 
         return parent::getData();

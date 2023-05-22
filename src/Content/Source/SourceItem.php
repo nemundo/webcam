@@ -25,4 +25,12 @@ class SourceItem extends AbstractContentItem
     {
         return parent::getDataRow();
     }
+
+
+    public function getSubject()
+    {
+        return $this->getDataRow()->source;
+    }
+
+
 }

@@ -12,6 +12,7 @@
             "email": "urs.lang@nemundo.ch"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "nemundo/framework": "*",
         "nemundo/content": "*",

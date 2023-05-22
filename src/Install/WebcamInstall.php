@@ -9,6 +9,7 @@ use Nemundo\Content\Application\ContentApplication;
 use Nemundo\Content\Setup\ContentTypeSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Webcam\Application\WebcamApplication;
+use Nemundo\Webcam\Content\Source\SourceType;
 use Nemundo\Webcam\Content\Webcam\WebcamType;
 use Nemundo\Webcam\Data\PublicationStatus\PublicationStatus;
 use Nemundo\Webcam\Data\WebcamModelCollection;
@@ -43,6 +44,7 @@ class WebcamInstall extends AbstractInstall
             ->addScript(new WebcamCleanScript());
 
         (new ContentTypeSetup(new WebcamApplication()))
+            ->addContentType(new SourceType())
             ->addContentType(new WebcamType());
 
         $this

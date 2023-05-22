@@ -21,17 +21,14 @@ class SourceBuilder extends AbstractContentBuilder
     protected function onCreate()
     {
 
-
-
         $data = new Source();
-        //$data->updateOnDuplicate = true;
         $data->source = $this->source;
         $data->hasUrl = $this->hasSourceUrl();
         $data->url = $this->sourceUrl;
-        $data->save();
-
+        $this->dataId = $data->save();
 
     }
+
 
     protected function onUpdate()
     {

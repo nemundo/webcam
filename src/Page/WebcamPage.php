@@ -12,6 +12,7 @@ use Nemundo\Admin\Com\Layout\Flex\AdminRowFlexLayout;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
+use Nemundo\App\Scheduler\Com\LastUpdate\LastUpdateParagraph;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
@@ -23,6 +24,7 @@ use Nemundo\Webcam\Data\Image\ImageModel;
 use Nemundo\Webcam\Data\Webcam\WebcamPaginationReader;
 use Nemundo\Webcam\Parameter\SourceParameter;
 use Nemundo\Webcam\Parameter\WebcamParameter;
+use Nemundo\Webcam\Scheduler\ImageCrawlerScheduler;
 use Nemundo\Webcam\Site\Csv\WebcamCsvSite;
 use Nemundo\Webcam\Site\ImageCroppingSite;
 use Nemundo\Webcam\Site\ImageDeleteSite;
@@ -197,6 +199,10 @@ class WebcamPage extends AbstractTemplateDocument
 
         $pagination = new AdminPagination($layout);
         $pagination->paginationReader = $webcamReader;
+
+        $latest = new LastUpdateParagraph($layout);
+        $latest->scheduler = new ImageCrawlerScheduler();
+
 
         return parent::getContent();
     }

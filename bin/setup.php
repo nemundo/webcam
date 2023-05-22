@@ -12,10 +12,6 @@ $reset->reset();
 
 (new \Nemundo\App\ModelDesigner\Application\ModelDesignerApplication())->installApp();
 (new \Nemundo\Webcam\Application\WebcamApplication())->installApp();
-
-
+(new \Nemundo\Content\Index\Geo\Application\GeoIndexApplication())->installApp();
 
 $reset->remove();
-
-
-

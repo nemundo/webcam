@@ -11,9 +11,9 @@ class WebcamContainerPage extends AbstractTemplateDocument
     public function getContent()
     {
 
-        new WebcamWidget($this);
+        //new WebcamWidget($this);
 
-        //new WebcamContainer($this);
+        new WebcamContainer($this);
 
         return parent::getContent();
     }

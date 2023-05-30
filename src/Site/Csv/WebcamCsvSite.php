@@ -4,7 +4,7 @@ namespace Nemundo\Webcam\Site\Csv;
 
 use Nemundo\Admin\Site\AbstractCsvSite;
 use Nemundo\Core\Csv\Document\CsvDocument;
-use Nemundo\Webcam\Reader\WebcamDataReader;
+use Nemundo\Webcam\Reader\Webcam\WebcamDataReader;
 
 class WebcamCsvSite extends AbstractCsvSite
 {

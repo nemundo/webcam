@@ -21,6 +21,11 @@ public $url;
 */
 public $hasUrl;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $email;
+
 protected function loadModel() {
 $this->tableName = "webcam_source";
 $this->aliasTableName = "webcam_source";
@@ -61,6 +66,15 @@ $this->hasUrl->fieldName = "has_url";
 $this->hasUrl->aliasFieldName = "webcam_source_has_url";
 $this->hasUrl->label = "Has Url";
 $this->hasUrl->allowNullValue = false;
+
+$this->email = new \Nemundo\Model\Type\Text\TextType($this);
+$this->email->tableName = "webcam_source";
+$this->email->externalTableName = "webcam_source";
+$this->email->fieldName = "email";
+$this->email->aliasFieldName = "webcam_source_email";
+$this->email->label = "eMail";
+$this->email->allowNullValue = false;
+$this->email->length = 255;
 
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "source";

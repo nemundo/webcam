@@ -4,7 +4,7 @@ namespace Nemundo\Webcam\Com\ListBox;
 
 use Nemundo\Admin\Com\ListBox\AdminListBox;
 use Nemundo\Webcam\Parameter\SourceParameter;
-use Nemundo\Webcam\Reader\SourceDataReader;
+use Nemundo\Webcam\Reader\Source\SourceDataReader;
 
 class SourceListBox extends AdminListBox
 {

@@ -21,6 +21,11 @@ public $url;
 */
 public $hasUrl;
 
+/**
+* @var \Nemundo\Model\Type\Text\TextType
+*/
+public $email;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = SourceModel::class;
@@ -57,6 +62,14 @@ $this->hasUrl->externalTableName = $this->externalTableName;
 $this->hasUrl->aliasFieldName = $this->hasUrl->tableName . "_" . $this->hasUrl->fieldName;
 $this->hasUrl->label = "Has Url";
 $this->addType($this->hasUrl);
+
+$this->email = new \Nemundo\Model\Type\Text\TextType();
+$this->email->fieldName = "email";
+$this->email->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->email->externalTableName = $this->externalTableName;
+$this->email->aliasFieldName = $this->email->tableName . "_" . $this->email->fieldName;
+$this->email->label = "eMail";
+$this->addType($this->email);
 
 }
 }

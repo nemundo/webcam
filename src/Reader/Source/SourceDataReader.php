@@ -1,6 +1,6 @@
 <?php
 
-namespace Nemundo\Webcam\Reader;
+namespace Nemundo\Webcam\Reader\Source;
 
 use Nemundo\Webcam\Data\Source\SourceReader;
 

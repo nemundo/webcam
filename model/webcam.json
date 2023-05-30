@@ -292,6 +292,37 @@
         },
         {
             "template": "default",
+            "model_id": "689949a8-8c1f-4047-b00d-bb323ceb887b",
+            "label": "Region",
+            "class_name": "Region",
+            "table_name": "webcam_region",
+            "namespace": "Nemundo\\Webcam\\Data\\Region",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Region",
+                    "field_name": "region",
+                    "variable_name": "region",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                }
+            ],
+            "index": [
+                {
+                    "index_name": "region",
+                    "index_type": "index",
+                    "field_name": [
+                        "region"
+                    ]
+                }
+            ]
+        },
+        {
+            "template": "default",
             "model_id": "6a1778db-9ea6-4637-b88b-250bd19e0437",
             "label": "Source",
             "class_name": "Source",
@@ -326,6 +357,15 @@
                     "variable_name": "hasUrl",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "eMail",
+                    "field_name": "email",
+                    "variable_name": "email",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
                 }
             ],
             "index": [
@@ -484,6 +524,15 @@
                     "variable_name": "croppingImage",
                     "allow_null": false,
                     "is_deleted": false
+                },
+                {
+                    "type": "external",
+                    "label": "Region",
+                    "field_name": "region",
+                    "variable_name": "region",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "external_model_id": "689949a8-8c1f-4047-b00d-bb323ceb887b"
                 }
             ],
             "index": [
@@ -499,6 +548,14 @@
                     "index_type": "index",
                     "field_name": [
                         "active",
+                        "webcam"
+                    ]
+                },
+                {
+                    "index_name": "region",
+                    "index_type": "index",
+                    "field_name": [
+                        "region",
                         "webcam"
                     ]
                 }

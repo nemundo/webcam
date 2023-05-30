@@ -81,6 +81,16 @@ public $imageHeight;
 */
 public $croppingImage;
 
+/**
+* @var \Nemundo\Model\Type\External\Id\NumberExternalIdType
+*/
+public $regionId;
+
+/**
+* @var \Nemundo\Webcam\Data\Region\RegionExternalType
+*/
+public $region;
+
 protected function loadModel() {
 $this->tableName = "webcam_webcam";
 $this->aliasTableName = "webcam_webcam";
@@ -191,6 +201,13 @@ $this->croppingImage->aliasFieldName = "webcam_webcam_cropping_image";
 $this->croppingImage->label = "Cropping Image";
 $this->croppingImage->allowNullValue = false;
 
+$this->regionId = new \Nemundo\Model\Type\External\Id\NumberExternalIdType($this);
+$this->regionId->tableName = "webcam_webcam";
+$this->regionId->fieldName = "region";
+$this->regionId->aliasFieldName = "webcam_webcam_region";
+$this->regionId->label = "Region";
+$this->regionId->allowNullValue = false;
+
 $index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
 $index->indexName = "image_url";
 $index->addType($this->imageUrl);
@@ -198,6 +215,11 @@ $index->addType($this->imageUrl);
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "active_webcam";
 $index->addType($this->active);
+$index->addType($this->webcam);
+
+$index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
+$index->indexName = "region";
+$index->addType($this->regionId);
 $index->addType($this->webcam);
 
 }
@@ -228,6 +250,16 @@ $this->publicationStatus->tableName = "webcam_webcam";
 $this->publicationStatus->fieldName = "publication_status";
 $this->publicationStatus->aliasFieldName = "webcam_webcam_publication_status";
 $this->publicationStatus->label = "Publication Status";
+}
+return $this;
+}
+public function loadRegion() {
+if ($this->region == null) {
+$this->region = new \Nemundo\Webcam\Data\Region\RegionExternalType($this, "webcam_webcam_region");
+$this->region->tableName = "webcam_webcam";
+$this->region->fieldName = "region";
+$this->region->aliasFieldName = "webcam_webcam_region";
+$this->region->label = "Region";
 }
 return $this;
 }

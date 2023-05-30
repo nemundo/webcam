@@ -9,6 +9,7 @@ use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Content\Form\AbstractContentForm;
 use Nemundo\Core\Type\Geo\GeoCoordinate;
 use Nemundo\Webcam\Com\ListBox\PublicationStatusListBox;
+use Nemundo\Webcam\Com\ListBox\RegionListBox;
 use Nemundo\Webcam\Com\ListBox\SourceListBox;
 use Nemundo\Webcam\Data\Webcam\WebcamModel;
 use Nemundo\Webcam\Type\Publication\DraftPublication;
@@ -47,14 +48,9 @@ class WebcamForm extends AbstractContentForm
     private $sourceList;
 
     /**
-     * @var AdminTextBox
+     * @var RegionListBox
      */
-    //private $source;
-
-    /**
-     * @var AdminTextBox
-     */
-    //private $sourceUrl;
+    private $region;
 
     /**
      * @var AdminGeoCoordinateTextBox
@@ -87,6 +83,8 @@ class WebcamForm extends AbstractContentForm
 
         $this->sourceList = new SourceListBox($this);
 
+        $this->region = new RegionListBox($this);
+
         /*$this->source = new AdminTextBox($this);
         $this->source->label = $model->source->label;
 
@@ -117,6 +115,7 @@ class WebcamForm extends AbstractContentForm
         $this->direction->value = $webcamRow->direction;
         $this->imageUrl->value = $webcamRow->imageUrl;
         $this->sourceList->value = $webcamRow->sourceId;
+        $this->region->value=$webcamRow->regionId;
         /*$this->source->value = $webcamRow->source->source;
         $this->sourceUrl->value = $webcamRow->source->url;*/
         $this->geoCoordinate->setGeoCoordinate($webcamRow->geoCoordinate);
@@ -134,6 +133,7 @@ class WebcamForm extends AbstractContentForm
         $builder->direction = $this->direction->getValue();
         $builder->imageUrl = $this->imageUrl->getValue();
         $builder->sourceId = $this->sourceList->getValue();
+        $builder->regionId = $this->region->getValue();
         /*$builder->source = $this->source->getValue();
         $builder->sourceUrl = $this->sourceUrl->getValue();*/
         $builder->geoCoordinate = $this->geoCoordinate->getGeoCoordinate();

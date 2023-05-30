@@ -4,7 +4,7 @@ namespace Nemundo\Webcam\Site\Json;
 
 use Nemundo\Admin\Site\AbstractJsonSite;
 use Nemundo\Core\Json\Document\JsonResponse;
-use Nemundo\Webcam\Reader\WebcamDataReader;
+use Nemundo\Webcam\Reader\Webcam\WebcamDataReader;
 
 class WebcamJsonSite extends AbstractJsonSite
 {
@@ -27,6 +27,7 @@ class WebcamJsonSite extends AbstractJsonSite
     {
 
         $json = new JsonResponse();
+        $json->filename = 'webcam.json';
 
         $webcamReader = new WebcamDataReader();
         $webcamReader->model->loadSource();
@@ -38,9 +39,14 @@ class WebcamJsonSite extends AbstractJsonSite
             $data['webcam'] = $webcamRow->webcam;
             $data['description'] = $webcamRow->description;
 
-            //$data['description'] = $webcamRow->croppingImage->x description;
+            $dimension = $webcamRow->croppingImage->getCroppingDimension();
 
-
+            $cropping = [];
+            $cropping['x']= $dimension->x;
+            $cropping['y']= $dimension->y;
+            $cropping['width']= $dimension->width;
+            $cropping['height']= $dimension->height;
+            $data['cropping'] = $cropping;
 
             $data['direction'] = $webcamRow->direction;
             $data['image_url'] = $webcamRow->imageUrl;

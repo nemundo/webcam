@@ -1,10 +1,8 @@
 <?php
 
-namespace Nemundo\Webcam\Reader;
+namespace Nemundo\Webcam\Reader\Webcam;
 
 use Nemundo\Webcam\Data\Webcam\WebcamPaginationReader;
-use Nemundo\Webcam\Data\Webcam\WebcamReader;
-use Nemundo\Webcam\Reader\Filter\WebcamFilter;
 
 class WebcamDataPaginationReader extends WebcamPaginationReader
 {

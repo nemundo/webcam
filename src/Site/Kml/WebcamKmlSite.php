@@ -6,7 +6,7 @@ use Nemundo\Admin\Site\AbstractKmlSite;
 use Nemundo\Geo\Kml\Document\KmlDocument;
 use Nemundo\Geo\Kml\Object\KmlMarker;
 use Nemundo\Webcam\Content\Webcam\WebcamView;
-use Nemundo\Webcam\Reader\WebcamDataReader;
+use Nemundo\Webcam\Reader\Webcam\WebcamDataReader;
 
 class WebcamKmlSite extends AbstractKmlSite
 {

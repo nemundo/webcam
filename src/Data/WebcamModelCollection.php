@@ -10,6 +10,7 @@ $this->addModel(new \Nemundo\Webcam\Data\LogItem\LogItemModel());
 $this->addModel(new \Nemundo\Webcam\Data\LogType\LogTypeModel());
 $this->addModel(new \Nemundo\Webcam\Data\PublicationStatus\PublicationStatusModel());
 $this->addModel(new \Nemundo\Webcam\Data\PublicationStatusLog\PublicationStatusLogModel());
+$this->addModel(new \Nemundo\Webcam\Data\Region\RegionModel());
 $this->addModel(new \Nemundo\Webcam\Data\Source\SourceModel());
 $this->addModel(new \Nemundo\Webcam\Data\TextChangeLog\TextChangeLogModel());
 $this->addModel(new \Nemundo\Webcam\Data\TextLog\TextLogModel());

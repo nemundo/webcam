@@ -9,7 +9,7 @@ use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Html\Paragraph\Paragraph;
 use Nemundo\Webcam\Data\Image\ImageModel;
-use Nemundo\Webcam\Reader\WebcamDataReader;
+use Nemundo\Webcam\Reader\Webcam\WebcamDataReader;
 
 class WebcamWidget extends AdminCard  // AdminWidget
 {

@@ -4,8 +4,10 @@ namespace Nemundo\Webcam\Content\Webcam;
 
 use Nemundo\Content\Index\Geo\Type\GeoIndexTrait;
 use Nemundo\Content\Type\AbstractContentItem;
+use Nemundo\Webcam\Data\Image\ImageDelete;
 use Nemundo\Webcam\Data\Webcam\WebcamReader;
 use Nemundo\Webcam\Data\Webcam\WebcamRow;
+use Nemundo\Webcam\Import\WebcamImageImport;
 
 class WebcamItem extends AbstractContentItem
 {
@@ -21,6 +23,7 @@ class WebcamItem extends AbstractContentItem
     {
         $reader = new WebcamReader();
         $reader->model->loadSource();
+        $reader->model->loadRegion();
         $reader->model->loadLatestImage();
         $this->dataRow= $reader->getRowById($this->dataId);
     }
@@ -44,5 +47,27 @@ class WebcamItem extends AbstractContentItem
     {
         return $this->getDataRow()->geoCoordinate;
     }
+
+
+    public function deleteImage() {
+
+        $delete = new ImageDelete();
+        $delete->filter->andEqual($delete->model->webcamId,$this->dataId);
+        $delete->delete();
+
+        return $this;
+
+    }
+
+
+    public function importImage() {
+
+        //$webcamRow = (new WebcamItem($webcamId))->getDataRow();
+        (new WebcamImageImport())->importImgae($this->getDataRow());
+
+        return $this;
+
+    }
+
 
 }

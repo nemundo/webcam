@@ -3,10 +3,11 @@
 namespace Nemundo\Webcam\Content\Webcam;
 
 use Nemundo\Content\Type\AbstractContentBuilder;
-use Nemundo\Core\Image\Cropping\CroppingDimension;
+use Nemundo\Core\File\UniqueFilename;
 use Nemundo\Core\Image\Cropping\MaxImageCropping;
 use Nemundo\Core\Type\Geo\GeoCoordinate;
-use Nemundo\Web\WebConfig;
+use Nemundo\Core\WebRequest\CurlWebRequest;
+use Nemundo\Project\Path\TmpPath;
 use Nemundo\Webcam\Config\WebcamConfig;
 use Nemundo\Webcam\Data\GeoCoordinateChangeLog\GeoCoordinateChangeLog;
 use Nemundo\Webcam\Data\Log\Log;
@@ -37,6 +38,9 @@ class WebcamBuilder extends AbstractContentBuilder
     public $source;
 
     public $sourceUrl;
+
+    public $regionId;
+
 
     /**
      * @var GeoCoordinate
@@ -77,9 +81,16 @@ class WebcamBuilder extends AbstractContentBuilder
         $sourceId = $id->getId();*/
 
 
+        //$filename = (new CurlWebRequest())->downloadUrl() (new WebcamItem($this->dataId))->getDataRow()->latestImage->image->getFullFilename();
+
+        /*$maxCropping = new MaxImageCropping($filename);
+        $maxCropping->aspectRatioWidth = WebcamConfig::$aspectRatioWidth;
+        $maxCropping->aspectRatioHeight = WebcamConfig::$aspectRatioHeight;
+
+
         $croppingDimension = new CroppingDimension();
         $croppingDimension->width = 100;
-        $croppingDimension->height = 100;
+        $croppingDimension->height = 100;*/
 
 
         $data = new Webcam();
@@ -91,7 +102,8 @@ class WebcamBuilder extends AbstractContentBuilder
         $data->imageUrl = $this->imageUrl;
         $data->geoCoordinate = $this->geoCoordinate;
         $data->sourceId = $sourceId;
-        $data->croppingImage->saveCroppingDimension($croppingDimension);
+        $data->regionId = $this->regionId;
+        //$data->croppingImage->saveCroppingDimension($croppingDimension);
         $this->dataId = $data->save();
 
 
@@ -159,6 +171,7 @@ class WebcamBuilder extends AbstractContentBuilder
         $update->imageUrl = $this->imageUrl;
         $update->geoCoordinate = $this->geoCoordinate;
         $update->sourceId = $this->sourceId;
+        $update->regionId = $this->regionId;
         $update->updateById($this->dataId);
 
         $logId = $this->saveLog();
@@ -197,11 +210,9 @@ class WebcamBuilder extends AbstractContentBuilder
         }
 
 
-
-
         if ($webcamOldRow->imageUrl !== $this->imageUrl) {
 
-            $this->downloadImage();
+            //$this->downloadImage();
 
             /*$data = new GeoCoordinateChangeLog();
             $data->geoCoordinateOld = $webcamOldRow->geoCoordinate;
@@ -215,11 +226,6 @@ class WebcamBuilder extends AbstractContentBuilder
             $data->save();
 
         }
-
-
-
-
-
 
     }
 
@@ -236,13 +242,16 @@ class WebcamBuilder extends AbstractContentBuilder
     }
 
 
-
-    private function downloadImage() {
+    private function downloadImage()
+    {
 
         $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
-        (new WebcamImageImport())->importImgae($webcamRow);
 
-        $filename = (new WebcamItem($this->dataId))->getDataRow()->latestImage->image->getFullFilename();
+        $filename = (new TmpPath())
+            ->addPath((new UniqueFilename())->getUniqueFilename('jpg'))
+            ->getFullFilename();
+
+        (new CurlWebRequest())->downloadUrl($webcamRow->imageUrl, $filename);
 
         $maxCropping = new MaxImageCropping($filename);
         $maxCropping->aspectRatioWidth = WebcamConfig::$aspectRatioWidth;
@@ -253,10 +262,9 @@ class WebcamBuilder extends AbstractContentBuilder
         $update->updateById($webcamRow->id);
 
 
+        $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
+        (new WebcamImageImport())->importImgae($webcamRow);
 
     }
-
-
-
 
 }

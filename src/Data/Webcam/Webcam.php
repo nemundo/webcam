@@ -66,6 +66,11 @@ public $imageHeight;
 */
 public $croppingImage;
 
+/**
+* @var string
+*/
+public $regionId;
+
 public function __construct() {
 parent::__construct();
 $this->model = new WebcamModel();
@@ -87,6 +92,7 @@ $this->typeValueList->setModelValue($this->model->active, $this->active);
 $this->typeValueList->setModelValue($this->model->publicationStatusId, $this->publicationStatusId);
 $this->typeValueList->setModelValue($this->model->imageWidth, $this->imageWidth);
 $this->typeValueList->setModelValue($this->model->imageHeight, $this->imageHeight);
+$this->typeValueList->setModelValue($this->model->regionId, $this->regionId);
 $id = parent::save();
 return $id;
 }

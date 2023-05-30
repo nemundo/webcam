@@ -19,6 +19,11 @@ class SourceForm extends AbstractContentForm
      */
     private $sourceUrl;
 
+    /**
+     * @var 
+     */
+    private $email;
+
 
     public function getContent()
     {

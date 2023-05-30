@@ -81,6 +81,16 @@ public $imageHeight;
 */
 public $croppingImage;
 
+/**
+* @var \Nemundo\Model\Type\Id\IdType
+*/
+public $regionId;
+
+/**
+* @var \Nemundo\Webcam\Data\Region\RegionExternalType
+*/
+public $region;
+
 protected function loadExternalType() {
 parent::loadExternalType();
 $this->externalModelClassName = WebcamModel::class;
@@ -189,6 +199,13 @@ $this->croppingImage->label = "Cropping Image";
 $this->croppingImage->createObject();
 $this->addType($this->croppingImage);
 
+$this->regionId = new \Nemundo\Model\Type\Id\IdType();
+$this->regionId->fieldName = "region";
+$this->regionId->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->regionId->aliasFieldName = $this->regionId->tableName ."_".$this->regionId->fieldName;
+$this->regionId->label = "Region";
+$this->addType($this->regionId);
+
 }
 public function loadSource() {
 if ($this->source == null) {
@@ -220,6 +237,17 @@ $this->publicationStatus->tableName = $this->parentFieldName . "_" . $this->exte
 $this->publicationStatus->aliasFieldName = $this->publicationStatus->tableName ."_".$this->publicationStatus->fieldName;
 $this->publicationStatus->label = "Publication Status";
 $this->addType($this->publicationStatus);
+}
+return $this;
+}
+public function loadRegion() {
+if ($this->region == null) {
+$this->region = new \Nemundo\Webcam\Data\Region\RegionExternalType(null, $this->parentFieldName . "_region");
+$this->region->fieldName = "region";
+$this->region->tableName = $this->parentFieldName . "_" . $this->externalTableName;
+$this->region->aliasFieldName = $this->region->tableName ."_".$this->region->fieldName;
+$this->region->label = "Region";
+$this->addType($this->region);
 }
 return $this;
 }

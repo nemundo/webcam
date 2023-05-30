@@ -45,9 +45,13 @@ class WebcamImageCroppingForm extends AbstractAdminForm
         $update->croppingImage->saveCroppingDimension($this->image->getCroppingDimension());
         $update->updateById($this->webcamRow->id);
 
-        $webcamRow = (new WebcamItem($this->webcamRow->id))->getDataRow();
-        (new WebcamImageImport())->importImgae($webcamRow);
+        (new WebcamItem($this->webcamRow->id))
+        ->deleteImage()
+            ->importImage();
 
+
+        /*$webcamRow = $webcamItem->getDataRow();
+        (new WebcamImageImport())->importImgae($webcamRow);*/
 
     }
 

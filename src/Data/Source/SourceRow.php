@@ -31,6 +31,11 @@ public $url;
 */
 public $hasUrl;
 
+/**
+* @var string
+*/
+public $email;
+
 public function __construct(\Nemundo\Db\Row\AbstractDataRow $row, $model) {
 parent::__construct($row->getData());
 $this->row = $row;
@@ -38,5 +43,6 @@ $this->id = $this->getModelValue($model->id);
 $this->source = $this->getModelValue($model->source);
 $this->url = $this->getModelValue($model->url);
 $this->hasUrl = boolval($this->getModelValue($model->hasUrl));
+$this->email = $this->getModelValue($model->email);
 }
 }

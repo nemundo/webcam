@@ -48,14 +48,10 @@ class WebcamImageImport extends AbstractBase
                     ->addPath('square_' . (new UniqueFilename())->getUniqueFilename('jpg'))
                     ->getFilename();
 
-                /*$maxCropping = new MaxImageCropping($filename);
-                $maxCropping->aspectRatioWidth = 16;
-                $maxCropping->aspectRatioHeight = 9;*/
-
                 $cropping = new ImageCropping();
                 $cropping->sourceFilename = $filename;
                 $cropping->destinationFilename = $squareFilename;
-                $cropping->croppingDimension = $webcamRow->croppingImage->getCroppingDimension();  // $maxCropping->getCroppingDimension();
+                $cropping->croppingDimension = $webcamRow->croppingImage->getCroppingDimension();
                 $cropping->cropImage();
 
                 $data = new Image();
@@ -99,7 +95,6 @@ class WebcamImageImport extends AbstractBase
             }
 
         }
-
 
     }
 

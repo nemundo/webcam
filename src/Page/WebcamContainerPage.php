@@ -2,8 +2,10 @@
 
 namespace Nemundo\Webcam\Page;
 
+use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Com\Template\AbstractTemplateDocument;
 use Nemundo\Webcam\Com\Container\WebcamContainer;
+use Nemundo\Webcam\Com\Tab\WebcamTab;
 use Nemundo\Webcam\Com\Widget\WebcamWidget;
 
 class WebcamContainerPage extends AbstractTemplateDocument
@@ -13,7 +15,11 @@ class WebcamContainerPage extends AbstractTemplateDocument
 
         //new WebcamWidget($this);
 
-        new WebcamContainer($this);
+        $layout = new AdminFlexboxLayout($this);
+
+        new WebcamTab($layout);
+
+        new WebcamContainer($layout);
 
         return parent::getContent();
     }

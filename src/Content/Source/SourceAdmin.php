@@ -21,13 +21,15 @@ class SourceAdmin extends AbstractContentAdmin
         $header = new AdminTableHeader($table);
         $header->addText($sourceReader->model->source->label);
         $header->addText($sourceReader->model->url->label);
-
+        $header->addText($sourceReader->model->email->label);
+        $header->addEmpty();
 
         foreach ($sourceReader->getData() as $sourceRow) {
 
             $row = new AdminTableRow($table);
             $row->addText($sourceRow->source);
             $row->addText($sourceRow->url);
+            $row->addText($sourceRow->email);
             $row->addIconActionSite($this->getEditSite($sourceRow->id));
 
         }

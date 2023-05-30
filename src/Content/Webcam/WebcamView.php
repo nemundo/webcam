@@ -55,13 +55,18 @@ class WebcamView extends AbstractContentView
         $p = new Paragraph($this);
         $p->content = 'Vor '. $difference->getDifferenceInMinute().' Minuten';
 
+        /*$p = new Paragraph($this);
+        $p->content = 'Quelle: '. $webcamRow->source->source;*/
+
+        $p = new Paragraph($this);
+        $p->content = 'Region '. $webcamRow->region->region;
 
 
         $p = new Paragraph($this);
-        $p->content = 'Quelle '. $hyperlink->getBodyContent();  //webcamRow->source->source;
+        $p->content = 'Quelle: '. $hyperlink->getBodyContent();  //webcamRow->source->source;
 
         $p = new Paragraph($this);
-        $p->content = 'Update '. $webcamRow->latestImage->dateTime->getTimeLeadingZero();
+        $p->content = 'Update: '. $webcamRow->latestImage->dateTime->getTimeLeadingZero();
 
 
         return parent::getContent();

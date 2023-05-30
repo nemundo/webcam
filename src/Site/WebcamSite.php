@@ -7,6 +7,7 @@ use Nemundo\Webcam\Page\WebcamPage;
 use Nemundo\Webcam\Site\Csv\WebcamCsvSite;
 use Nemundo\Webcam\Site\Json\WebcamJsonSite;
 use Nemundo\Webcam\Site\Kml\WebcamKmlSite;
+use Nemundo\Webcam\Site\Workflow\SendWorkflowMailSite;
 
 class WebcamSite extends AbstractSite
 {
@@ -38,8 +39,10 @@ class WebcamSite extends AbstractSite
         new WebcamKmlSite($this);
 
         new SourceSite($this);
+        new RegionSite($this);
         new StatusSite($this);
 
+        new SendWorkflowMailSite($this);
 
         WebcamSite::$site = $this;
 

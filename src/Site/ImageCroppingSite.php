@@ -2,10 +2,11 @@
 
 namespace Nemundo\Webcam\Site;
 
+use Nemundo\Admin\Site\AbstractAdminIconSite;
 use Nemundo\Web\Site\AbstractSite;
 use Nemundo\Webcam\Page\ImageCroppingPage;
 
-class ImageCroppingSite extends AbstractSite
+class ImageCroppingSite extends AbstractAdminIconSite
 {
 
     /**
@@ -15,8 +16,9 @@ class ImageCroppingSite extends AbstractSite
 
     protected function loadSite()
     {
-        $this->title = 'ImageCropping';
+        $this->title = 'Image Cropping';
         $this->url = 'image-cropping';
+        $this->iconName = 'image';
         $this->menuActive = false;
 
         ImageCroppingSite::$site = $this;

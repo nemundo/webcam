@@ -8,7 +8,9 @@ use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Content\View\AbstractContentView;
 use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Html\Hyperlink\Hyperlink;
 use Nemundo\Html\Paragraph\Paragraph;
+use Nemundo\Package\Fancybox\FancyboxHyperlink;
 use Nemundo\Webcam\Data\Image\ImageModel;
 use Nemundo\Webcam\Parameter\WebcamParameter;
 use Nemundo\Webcam\Site\WebcamItemSite;
@@ -27,19 +29,14 @@ class WebcamView extends AbstractContentView
 
         $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
 
-        /*$p = new Paragraph($this);
-        $p->content = $webcamRow->description;*/
-
-        /*$img = new AdminImage($this);
-        $img->src = $webcamRow->latestImage->image->getImageUrlWithDomain((new ImageModel())->imageAutoSize500);*/
-
-
-        $hyperlink = new AdminSiteHyperlinkContainer($this);
-        $hyperlink->site = WebcamItemSite::$site;
-        $hyperlink->site->addParameter(new WebcamParameter($webcamRow->id));
+        $hyperlink = new FancyboxHyperlink($this);
+        $hyperlink->imageUrl = $webcamRow->latestImage->squareImage->getImageUrlWithDomain((new ImageModel())->squareImageAutoSize1500);
+        $hyperlink->caption = $webcamRow->webcam;
 
         $img = new AdminImage($hyperlink);
         $img->src = $webcamRow->latestImage->squareImage->getImageUrlWithDomain((new ImageModel())->imageAutoSize500);
+
+
 
 
         $hyperlink = new UrlHyperlink();

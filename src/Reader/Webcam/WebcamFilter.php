@@ -7,6 +7,8 @@ use Nemundo\Webcam\Type\Publication\PublishedPublication;
 trait WebcamFilter
 {
 
+    public $webcam;
+
     /**
      * @var bool
      */
@@ -30,6 +32,10 @@ trait WebcamFilter
     {
 
         $this->model->loadLatestImage();
+
+        if ($this->webcam !== null) {
+            $this->filter->andContains($this->model->webcam, $this->webcam);
+        }
 
         if ($this->active !== null) {
             $this->filter->andEqual($this->model->publicationStatusId, (new PublishedPublication())->id);

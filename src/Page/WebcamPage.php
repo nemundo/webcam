@@ -9,14 +9,18 @@ use Nemundo\Admin\Com\Hyperlink\AdminSiteHyperlinkContainer;
 use Nemundo\Admin\Com\Image\AdminImage;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Layout\Flex\AdminRowFlexLayout;
+use Nemundo\Admin\Com\ListBox\AdminSearchTextBox;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
+use Nemundo\Admin\Com\Table\Sorting\AdminUpdDownSortingHyperlink;
+use Nemundo\Admin\Parameter\PageParameter;
 use Nemundo\App\Scheduler\Com\LastUpdate\LastUpdateParagraph;
 use Nemundo\Com\Html\Hyperlink\SiteHyperlink;
 use Nemundo\Com\Html\Hyperlink\UrlHyperlink;
 use Nemundo\Com\TableBuilder\TableHeader;
 use Nemundo\Com\Template\AbstractTemplateDocument;
+use Nemundo\Core\Text\BoldText;
 use Nemundo\Webcam\Com\ListBox\PublicationStatusListBox;
 use Nemundo\Webcam\Com\ListBox\RegionListBox;
 use Nemundo\Webcam\Com\ListBox\SourceListBox;
@@ -47,6 +51,11 @@ class WebcamPage extends AbstractTemplateDocument
         new WebcamTab($layout);
 
         $form = new AdminSearchForm($layout);
+
+        $webcam = new AdminSearchTextBox($form);
+        $webcam->label = 'Webcam';
+        $webcam->searchMode=true;
+
 
         $region = new RegionListBox($form);
         $region->submitOnChange = true;
@@ -83,8 +92,12 @@ class WebcamPage extends AbstractTemplateDocument
         $table = new AdminTable($layout);
 
         $webcamReader = new WebcamDataPaginationReader();
+        $webcamReader->currentPage = (new PageParameter())->getValue();
         $webcamReader->loadModel();
 
+        if ($webcam->hasValue()) {
+            $webcamReader->webcam=$webcam->getValue();
+        }
 
         if ($publicationStatus->hasValue()) {
             $webcamReader->filter->andEqual($webcamReader->model->publicationStatusId, $publicationStatus->getValue());
@@ -99,20 +112,43 @@ class WebcamPage extends AbstractTemplateDocument
         }
 
 
+        $bold = new BoldText();
+        $bold->addKeyword($webcam->getValue());
+
+
         $header = new TableHeader($table);
         $header->addText($webcamReader->model->publicationStatus->label);
         $header->addText($webcamReader->model->active->label);
         $header->addEmpty();
-        $header->addText($webcamReader->model->latestImage->label);
-        $header->addText($webcamReader->model->webcam->label);
+        //$header->addText($webcamReader->model->latestImage->label);
+
+        $sorting = new AdminUpdDownSortingHyperlink($header);
+        $sorting->fieldType = $webcamReader->model->latestImage->dateTime;
+        $sorting->label = $webcamReader->model->latestImage->label;
+        $sorting->checkSorting($webcamReader);
+
+        $sorting = new AdminUpdDownSortingHyperlink($header);
+        $sorting->fieldType = $webcamReader->model->webcam;
+        $sorting->label = $webcamReader->model->webcam->label;
+        $sorting->checkSorting($webcamReader);
+
+        //$header->addText($webcamReader->model->webcam->label);
+
+
+
+
         $header->addText($webcamReader->model->description->label);
-        $header->addText($webcamReader->model->imageWidth->label);
-        $header->addText($webcamReader->model->imageHeight->label);
+        /*$header->addText($webcamReader->model->imageWidth->label);
+        $header->addText($webcamReader->model->imageHeight->label);*/
         $header->addText($webcamReader->model->region->label);
         $header->addText($webcamReader->model->source->label);
-        $header->addText($webcamReader->model->imageUrl->label);
+        //$header->addText($webcamReader->model->imageUrl->label);
         //$header->addText($webcamReader->model->geoCoordinate->label);
-        $header->addEmpty(2);
+        $header->addEmpty(3);
+
+
+
+
 
         foreach ($webcamReader->getData() as $webcamRow) {
 
@@ -128,7 +164,7 @@ class WebcamPage extends AbstractTemplateDocument
 
             $site = clone(WebcamItemSite::$site);
             $site->addParameter(new WebcamParameter($webcamRow->id));
-            $site->title = $webcamRow->webcam;
+            $site->title = $bold->getBoldText( $webcamRow->webcam);
 
 
             //if ($webcamRow->active) {
@@ -157,8 +193,8 @@ class WebcamPage extends AbstractTemplateDocument
 
             $row->addText($webcamRow->description);
 
-            $row->addText($webcamRow->imageWidth);
-            $row->addText($webcamRow->imageHeight);
+            /*$row->addText($webcamRow->imageWidth);
+            $row->addText($webcamRow->imageHeight);*/
 
             //$row->addText($webcamRow->source->source);
 
@@ -170,22 +206,22 @@ class WebcamPage extends AbstractTemplateDocument
             $row->addText($webcamRow->region->region);
 
 
-            $url = new UrlHyperlink($row);
+            /*$url = new UrlHyperlink($row);
             $url->openNewWindow = true;
             $url->content = 'Bild';  // $webcamRow->imageUrl;
-            $url->url = $webcamRow->imageUrl;
+            $url->url = $webcamRow->imageUrl;*/
 
             //$row->addText($webcamRow->geoCoordinate->getText());
 
 
             $site = clone(ImageCroppingSite::$site);
             $site->addParameter(new WebcamParameter($webcamRow->id));
-            $row->addSite($site);
+            $row->addIconSite($site);
 
 
-            $site = clone(WebcamLogSite::$site);
+            /*$site = clone(WebcamLogSite::$site);
             $site->addParameter(new WebcamParameter($webcamRow->id));
-            $row->addSite($site);
+            $row->addSite($site);*/
 
 
             $site = clone(WebcamEditSite::$site);
@@ -193,9 +229,9 @@ class WebcamPage extends AbstractTemplateDocument
             $row->addIconSite($site);
 
 
-            $site = clone(ImageDeleteSite::$site);
+            /*$site = clone(ImageDeleteSite::$site);
             $site->addParameter(new WebcamParameter($webcamRow->id));
-            $row->addIconSite($site);
+            $row->addIconSite($site);*/
 
 
             $site = clone(WebcamDeleteSite::$site);

@@ -96,6 +96,10 @@
                         {
                             "format_type": "auto_size",
                             "size": "500"
+                        },
+                        {
+                            "format_type": "auto_size",
+                            "size": "1500"
                         }
                     ]
                 }

@@ -2,9 +2,11 @@
 
 namespace Nemundo\Webcam\Content\Webcam;
 
+use Nemundo\Content\Index\Workflow\Type\Process\AbstractProcess;
 use Nemundo\Content\Type\AbstractContentType;
+use Nemundo\Webcam\Content\WebcamErfassung\WebcamErfassungType;
 
-class WebcamType extends AbstractContentType
+class WebcamType extends AbstractProcess
 {
     protected function loadContentType()
     {
@@ -13,5 +15,8 @@ class WebcamType extends AbstractContentType
         $this->formClassList[] = WebcamForm::class;
         $this->viewClassList[] = WebcamView::class;
         $this->itemClass = WebcamItem::class;
+
+        $this->startStatusClass=WebcamErfassungType::class;
+
     }
 }

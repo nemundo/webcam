@@ -2,6 +2,7 @@
 
 namespace Nemundo\Webcam\Content\Webcam;
 
+use Nemundo\Content\Index\Workflow\Type\Process\AbstractProcessBuilder;
 use Nemundo\Content\Type\AbstractContentBuilder;
 use Nemundo\Core\File\UniqueFilename;
 use Nemundo\Core\Image\Cropping\MaxImageCropping;
@@ -20,10 +21,10 @@ use Nemundo\Webcam\Type\Log\GeoCoordinateChangeLogType;
 use Nemundo\Webcam\Type\Log\PublicationStatusLogType;
 use Nemundo\Webcam\Type\Publication\PublishedPublication;
 
-class WebcamBuilder extends AbstractContentBuilder
+class WebcamBuilder extends AbstractProcessBuilder
 {
 
-    public $publicationStatusId;
+    /*public $publicationStatusId;
 
     public $webcam;
 
@@ -45,15 +46,15 @@ class WebcamBuilder extends AbstractContentBuilder
     /**
      * @var GeoCoordinate
      */
-    public $geoCoordinate;
+    //public $geoCoordinate;
 
 
     protected function loadBuilder()
     {
         $this->contentType = new WebcamType();
 
-        $this->publicationStatusId = (new PublishedPublication())->id;
-        $this->geoCoordinate = new GeoCoordinate();
+        /*$this->publicationStatusId = (new PublishedPublication())->id;
+        $this->geoCoordinate = new GeoCoordinate();*/
 
     }
 
@@ -61,12 +62,17 @@ class WebcamBuilder extends AbstractContentBuilder
     protected function onCreate()
     {
 
+        $data = new Webcam();
+        $data->webcam='[empty]';
+        $this->dataId = $data->save();
+
+
         /*$hasUrl = false;
         if (($this->sourceUrl !== '') && ($this->sourceUrl !== null)) {
             $hasUrl = true;
         }*/
 
-        $sourceId = $this->sourceId;
+        //$sourceId = $this->sourceId;
 
 
         /*$data = new Source();
@@ -93,7 +99,7 @@ class WebcamBuilder extends AbstractContentBuilder
         $croppingDimension->height = 100;*/
 
 
-        $data = new Webcam();
+        /*$data = new Webcam();
         $data->publicationStatusId = $this->publicationStatusId;
         $data->active = false;
         $data->webcam = $this->webcam;
@@ -111,7 +117,7 @@ class WebcamBuilder extends AbstractContentBuilder
         $id->filter->andEqual($id->model->imageUrl, $this->imageUrl);
         $this->dataId = $id->getId();*/
 
-        $logId = $this->saveLog();
+        /*$logId = $this->saveLog();
 
 
         $data = new PublicationStatusLog();
@@ -160,6 +166,8 @@ class WebcamBuilder extends AbstractContentBuilder
     protected function onUpdate()
     {
 
+
+        /*
         $webcamOldRow = (new WebcamItem($this->dataId))->getDataRow();
 
 
@@ -219,18 +227,18 @@ class WebcamBuilder extends AbstractContentBuilder
             $data->geoCoordinateNew = $this->geoCoordinate;
             $dataId = $data->save();*/
 
-            $data = new LogItem();
+      /*      $data = new LogItem();
             $data->logId = $logId;
             $data->dataId = $dataId;
             $data->text = 'image url change';  // (new GeoCoordinateChangeLogType())->getText($dataId);
             $data->save();
 
-        }
+        }*/
 
     }
 
 
-    private function saveLog()
+    /*private function saveLog()
     {
 
         $data = new Log();
@@ -265,6 +273,6 @@ class WebcamBuilder extends AbstractContentBuilder
         $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
         (new WebcamImageImport())->importImgae($webcamRow);
 
-    }
+    }*/
 
 }

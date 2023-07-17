@@ -6,12 +6,15 @@ use Nemundo\App\Application\Type\Install\AbstractInstall;
 use Nemundo\App\Scheduler\Setup\SchedulerSetup;
 use Nemundo\App\Script\Setup\ScriptSetup;
 use Nemundo\Content\Application\ContentApplication;
+use Nemundo\Content\Index\Workflow\Application\WorkflowApplication;
+use Nemundo\Content\Index\Workflow\Setup\ProcessSetup;
 use Nemundo\Content\Setup\ContentTypeSetup;
 use Nemundo\Model\Setup\ModelCollectionSetup;
 use Nemundo\Webcam\Application\WebcamApplication;
 use Nemundo\Webcam\Content\Region\RegionType;
 use Nemundo\Webcam\Content\Source\SourceType;
 use Nemundo\Webcam\Content\Webcam\WebcamType;
+use Nemundo\Webcam\Content\WebcamErfassung\WebcamErfassungType;
 use Nemundo\Webcam\Data\PublicationStatus\PublicationStatus;
 use Nemundo\Webcam\Data\WebcamModelCollection;
 use Nemundo\Webcam\Scheduler\ImageCrawlerScheduler;
@@ -31,6 +34,7 @@ class WebcamInstall extends AbstractInstall
 
         (new ContentApplication())->installApp();
         //(new DatasetApplication())->installApp();
+        (new WorkflowApplication())->installApp();
 
         (new ModelCollectionSetup())
             ->addCollection(new WebcamModelCollection());
@@ -44,7 +48,12 @@ class WebcamInstall extends AbstractInstall
             ->addScript(new ImageCleanScript())
             ->addScript(new WebcamCleanScript());
 
+        (new ProcessSetup())
+        ->addProcess(new WebcamType());
+
+
         (new ContentTypeSetup(new WebcamApplication()))
+            ->addContentType(new WebcamErfassungType())
             ->addContentType(new SourceType())
             ->addContentType(new RegionType())
             ->addContentType(new WebcamType());

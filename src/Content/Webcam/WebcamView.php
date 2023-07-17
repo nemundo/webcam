@@ -27,7 +27,7 @@ class WebcamView extends AbstractContentView
     public function getContent()
     {
 
-        $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
+        /*$webcamRow = (new WebcamItem($this->dataId))->getDataRow();
 
         $hyperlink = new FancyboxHyperlink($this);
         $hyperlink->imageUrl = $webcamRow->latestImage->squareImage->getImageUrlWithDomain((new ImageModel())->squareImageAutoSize1500);
@@ -55,7 +55,7 @@ class WebcamView extends AbstractContentView
         /*$p = new Paragraph($this);
         $p->content = 'Quelle: '. $webcamRow->source->source;*/
 
-        $p = new Paragraph($this);
+        /*$p = new Paragraph($this);
         $p->content = 'Region '. $webcamRow->region->region;
 
 
@@ -63,7 +63,7 @@ class WebcamView extends AbstractContentView
         $p->content = 'Quelle: '. $hyperlink->getBodyContent();  //webcamRow->source->source;
 
         $p = new Paragraph($this);
-        $p->content = 'Update: '. $webcamRow->latestImage->dateTime->getTimeLeadingZero();
+        $p->content = 'Update: '. $webcamRow->latestImage->dateTime->getTimeLeadingZero();*/
 
 
         return parent::getContent();

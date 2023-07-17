@@ -541,13 +541,6 @@
             ],
             "index": [
                 {
-                    "index_name": "image_url",
-                    "index_type": "unique_index",
-                    "field_name": [
-                        "image_url"
-                    ]
-                },
-                {
                     "index_name": "active_webcam",
                     "index_type": "index",
                     "field_name": [
@@ -564,6 +557,54 @@
                     ]
                 }
             ]
+        },
+        {
+            "template": "default",
+            "model_id": "fc3a8863-9bbf-4ad7-9e05-73a84014653a",
+            "label": "Webcam Erfassung",
+            "class_name": "WebcamErfassung",
+            "table_name": "webcam_webcam_erfassung",
+            "namespace": "Nemundo\\Webcam\\Data\\WebcamErfassung",
+            "row_class_name": "",
+            "primary_index": "auto_increment",
+            "is_deleted": false,
+            "type": [
+                {
+                    "type": "text",
+                    "label": "Webcam",
+                    "field_name": "webcam",
+                    "variable_name": "webcam",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "large_text",
+                    "label": "Description",
+                    "field_name": "description",
+                    "variable_name": "description",
+                    "allow_null": false,
+                    "is_deleted": false
+                },
+                {
+                    "type": "text",
+                    "label": "Image Url",
+                    "field_name": "image_url",
+                    "variable_name": "imageUrl",
+                    "allow_null": false,
+                    "is_deleted": false,
+                    "length": "255"
+                },
+                {
+                    "type": "geo_coordinate",
+                    "label": "Geo Coordinate",
+                    "field_name": "geo_coordinate",
+                    "variable_name": "geoCoordinate",
+                    "allow_null": false,
+                    "is_deleted": false
+                }
+            ],
+            "index": []
         }
     ]
 }

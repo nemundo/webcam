@@ -17,6 +17,7 @@ use Nemundo\Webcam\Com\Carousel\WebcamImageCarousel;
 use Nemundo\Webcam\Com\Tab\WebcamTab;
 use Nemundo\Webcam\Com\Table\LogTable;
 use Nemundo\Webcam\Content\Webcam\WebcamItem;
+use Nemundo\Webcam\Data\Image\ImageCount;
 use Nemundo\Webcam\Data\Image\ImageReader;
 use Nemundo\Webcam\Data\Log\LogReader;
 use Nemundo\Webcam\Parameter\WebcamParameter;
@@ -50,6 +51,11 @@ class WebcamItemPage extends AbstractTemplateDocument
         $table->addLabelValue('y', $dimension->x);
         $table->addLabelValue('width', $dimension->width);
         $table->addLabelValue('height', $dimension->height);
+
+        $imageCount = new ImageCount();
+        $imageCount->filter->andEqual($imageCount->model->webcamId,$webcamId);
+        $table->addLabelValue('Image Count',$imageCount->getFormatCount());
+
 
 
         $btn = new AdminIconSiteButton($layout);

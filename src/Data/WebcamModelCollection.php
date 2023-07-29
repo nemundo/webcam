@@ -15,5 +15,6 @@ $this->addModel(new \Nemundo\Webcam\Data\Source\SourceModel());
 $this->addModel(new \Nemundo\Webcam\Data\TextChangeLog\TextChangeLogModel());
 $this->addModel(new \Nemundo\Webcam\Data\TextLog\TextLogModel());
 $this->addModel(new \Nemundo\Webcam\Data\Webcam\WebcamModel());
+$this->addModel(new \Nemundo\Webcam\Data\WebcamErfassung\WebcamErfassungModel());
 }
 }

@@ -7,7 +7,6 @@ use Nemundo\Core\Date\DateTimeDifference;
 use Nemundo\Core\File\File;
 use Nemundo\Core\File\UniqueFilename;
 use Nemundo\Core\Image\Cropping\ImageCropping;
-use Nemundo\Core\Image\Cropping\MaxImageCropping;
 use Nemundo\Core\Image\ImageFile;
 use Nemundo\Core\Type\DateTime\DateTime;
 use Nemundo\Core\WebRequest\WebRequest;

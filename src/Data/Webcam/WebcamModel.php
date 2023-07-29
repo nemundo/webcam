@@ -208,10 +208,6 @@ $this->regionId->aliasFieldName = "webcam_webcam_region";
 $this->regionId->label = "Region";
 $this->regionId->allowNullValue = false;
 
-$index = new \Nemundo\Model\Definition\Index\ModelUniqueIndex($this);
-$index->indexName = "image_url";
-$index->addType($this->imageUrl);
-
 $index = new \Nemundo\Model\Definition\Index\ModelIndex($this);
 $index->indexName = "active_webcam";
 $index->addType($this->active);

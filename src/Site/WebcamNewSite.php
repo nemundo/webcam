@@ -18,7 +18,7 @@ class WebcamNewSite extends AbstractNewIconSite
     {
         $this->title = 'New Webcam';
         $this->url = 'new';
-        $this->menuActive=false;
+        //$this->menuActive=false;
 
         WebcamNewSite::$site=$this;
 

@@ -3,13 +3,13 @@
 namespace Nemundo\Webcam\Page;
 
 use Nemundo\Admin\Com\Button\AdminIconSiteButton;
-use Nemundo\Admin\Com\Copy\CopyTextBox;
 use Nemundo\Admin\Com\Form\AdminSearchForm;
 use Nemundo\Admin\Com\Hyperlink\AdminSiteHyperlinkContainer;
 use Nemundo\Admin\Com\Image\AdminImage;
 use Nemundo\Admin\Com\Layout\AdminFlexboxLayout;
 use Nemundo\Admin\Com\Layout\Flex\AdminRowFlexLayout;
 use Nemundo\Admin\Com\ListBox\AdminSearchTextBox;
+use Nemundo\Admin\Com\ListBox\AdminTextBox;
 use Nemundo\Admin\Com\Pagination\AdminPagination;
 use Nemundo\Admin\Com\Table\AdminTable;
 use Nemundo\Admin\Com\Table\Row\AdminTableRow;
@@ -26,20 +26,17 @@ use Nemundo\Webcam\Com\ListBox\RegionListBox;
 use Nemundo\Webcam\Com\ListBox\SourceListBox;
 use Nemundo\Webcam\Com\Tab\WebcamTab;
 use Nemundo\Webcam\Data\Image\ImageModel;
-use Nemundo\Webcam\Data\Webcam\WebcamPaginationReader;
 use Nemundo\Webcam\Parameter\SourceParameter;
 use Nemundo\Webcam\Parameter\WebcamParameter;
 use Nemundo\Webcam\Reader\Webcam\WebcamDataPaginationReader;
 use Nemundo\Webcam\Scheduler\ImageCrawlerScheduler;
 use Nemundo\Webcam\Site\Csv\WebcamCsvSite;
 use Nemundo\Webcam\Site\ImageCroppingSite;
-use Nemundo\Webcam\Site\ImageDeleteSite;
 use Nemundo\Webcam\Site\Json\WebcamJsonSite;
 use Nemundo\Webcam\Site\Kml\WebcamKmlSite;
 use Nemundo\Webcam\Site\WebcamDeleteSite;
 use Nemundo\Webcam\Site\WebcamEditSite;
 use Nemundo\Webcam\Site\WebcamItemSite;
-use Nemundo\Webcam\Site\WebcamLogSite;
 use Nemundo\Webcam\Site\WebcamNewSite;
 
 class WebcamPage extends AbstractTemplateDocument
@@ -54,7 +51,7 @@ class WebcamPage extends AbstractTemplateDocument
 
         $webcam = new AdminSearchTextBox($form);
         $webcam->label = 'Webcam';
-        $webcam->searchMode=true;
+        $webcam->searchMode = true;
 
 
         $region = new RegionListBox($form);
@@ -84,7 +81,7 @@ class WebcamPage extends AbstractTemplateDocument
         $site = clone(WebcamJsonSite::$site);
         $site->addParameter(new SourceParameter());
 
-        $copy = new CopyTextBox($rowLayout);
+        $copy = new AdminTextBox($rowLayout);
         $copy->label = 'Json Web Service';
         $copy->value = $site->getUrlWithDomain();
 
@@ -96,7 +93,7 @@ class WebcamPage extends AbstractTemplateDocument
         $webcamReader->loadModel();
 
         if ($webcam->hasValue()) {
-            $webcamReader->webcam=$webcam->getValue();
+            $webcamReader->webcam = $webcam->getValue();
         }
 
         if ($publicationStatus->hasValue()) {
@@ -135,8 +132,6 @@ class WebcamPage extends AbstractTemplateDocument
         //$header->addText($webcamReader->model->webcam->label);
 
 
-
-
         $header->addText($webcamReader->model->description->label);
         /*$header->addText($webcamReader->model->imageWidth->label);
         $header->addText($webcamReader->model->imageHeight->label);*/
@@ -145,9 +140,6 @@ class WebcamPage extends AbstractTemplateDocument
         //$header->addText($webcamReader->model->imageUrl->label);
         //$header->addText($webcamReader->model->geoCoordinate->label);
         $header->addEmpty(3);
-
-
-
 
 
         foreach ($webcamReader->getData() as $webcamRow) {
@@ -164,7 +156,7 @@ class WebcamPage extends AbstractTemplateDocument
 
             $site = clone(WebcamItemSite::$site);
             $site->addParameter(new WebcamParameter($webcamRow->id));
-            $site->title = $bold->getBoldText( $webcamRow->webcam);
+            $site->title = $bold->getBoldText($webcamRow->webcam);
 
 
             //if ($webcamRow->active) {

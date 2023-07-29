@@ -2,13 +2,13 @@
 
 require "config.php";
 
-(new \Nemundo\Webcam\Application\WebcamApplication())->reinstallApp();
+//(new \Nemundo\Webcam\Application\WebcamApplication())->reinstallApp();
 
 $builder = new \Nemundo\Webcam\Content\Webcam\WebcamBuilder();
 $builder->webcam = 'Gummenalp';
 $builder->imageUrl = 'https://www.gummenalp.ch/livecam/gummenalp.jpg';
 $builder->source = 'Restaurant Gummenalp';
-$builder->sourceUrl = '';
+$builder->sourceUrl = 'https://www.gummenalp.ch';
 $builder->buildContent();
 
 

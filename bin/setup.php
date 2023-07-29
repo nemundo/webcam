@@ -2,9 +2,10 @@
 
 require  "config.php";
 
-
 use Nemundo\Project\Install\ProjectInstall;
 use Nemundo\Project\Reset\ProjectReset;
+
+(new \Nemundo\Db\Provider\MySql\Database\MySqlDatabase())->createDatabase();
 
 $reset = new ProjectReset();
 $reset->reset();

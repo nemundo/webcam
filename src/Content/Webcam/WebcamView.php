@@ -27,7 +27,7 @@ class WebcamView extends AbstractContentView
     public function getContent()
     {
 
-        /*$webcamRow = (new WebcamItem($this->dataId))->getDataRow();
+        $webcamRow = (new WebcamItem($this->dataId))->getDataRow();
 
         $hyperlink = new FancyboxHyperlink($this);
         $hyperlink->imageUrl = $webcamRow->latestImage->squareImage->getImageUrlWithDomain((new ImageModel())->squareImageAutoSize1500);

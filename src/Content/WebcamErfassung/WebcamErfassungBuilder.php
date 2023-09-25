@@ -3,7 +3,8 @@
 namespace Nemundo\Webcam\Content\WebcamErfassung;
 
 use Nemundo\Content\Builder\IndexBuilder;
-use Nemundo\Content\Index\Workflow\Type\Status\AbstractStatusBuilder;
+
+use Nemundo\Content\Index\Workflow\Type\Status\AbstractWorkflowStatusBuilder;
 use Nemundo\Content\Type\AbstractContentBuilder;
 use Nemundo\ContentTest\App\Gastro\Content\GastroWorkflow\GastroWorkflowItem;
 use Nemundo\Core\Type\Geo\GeoCoordinate;
@@ -20,7 +21,7 @@ use Nemundo\Webcam\Type\Log\PublicationStatusLogType;
 use Nemundo\Webcam\Type\Publication\DraftPublication;
 use Nemundo\Webcam\Type\Publication\PublishedPublication;
 
-class WebcamErfassungBuilder extends AbstractStatusBuilder
+class WebcamErfassungBuilder extends AbstractWorkflowStatusBuilder
 {
 
     public $publicationStatusId;

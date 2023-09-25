@@ -1,3 +1,0 @@
-git pull
-composer update
-php bin/setup.php

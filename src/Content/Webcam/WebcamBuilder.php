@@ -6,6 +6,7 @@ use Nemundo\Content\Index\Workflow\Type\Process\AbstractProcessBuilder;
 use Nemundo\Content\Type\AbstractContentBuilder;
 use Nemundo\Core\File\UniqueFilename;
 use Nemundo\Core\Image\Cropping\MaxImageCropping;
+use Nemundo\Core\Random\RandomText;
 use Nemundo\Core\Type\Geo\GeoCoordinate;
 use Nemundo\Core\WebRequest\CurlWebRequest;
 use Nemundo\Project\Path\TmpPath;
@@ -64,6 +65,7 @@ class WebcamBuilder extends AbstractProcessBuilder
 
         $data = new Webcam();
         $data->webcam='[empty]';
+        $data->imageUrl = (new RandomText())->getText();
         $this->dataId = $data->save();
 
 

@@ -9,6 +9,7 @@ use Nemundo\Core\File\UniqueFilename;
 use Nemundo\Core\Image\Cropping\ImageCropping;
 use Nemundo\Core\Image\ImageFile;
 use Nemundo\Core\Type\DateTime\DateTime;
+use Nemundo\Core\WebRequest\CurlWebRequest;
 use Nemundo\Core\WebRequest\WebRequest;
 use Nemundo\Project\Path\TmpPath;
 use Nemundo\Webcam\Config\WebcamConfig;
@@ -28,7 +29,7 @@ class WebcamImageImport extends AbstractBase
             ->addPath((new UniqueFilename())->getUniqueFilename('jpg'))
             ->getFilename();
 
-        $download = new WebRequest();
+        $download = new CurlWebRequest();
         $download->downloadUrl($webcamRow->imageUrl, $filename);
 
         $file = new File($filename);
